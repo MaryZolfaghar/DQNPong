@@ -23,16 +23,17 @@ done
 python train.py \
 --use_cuda \
 --seed 1 \
---batch_size 32 \
+--batch_size 8 \
 --num_frames 1000000 \
 --gamma 0.99 \
 --epsilon_start 1.0 \
 --epsilon_final 0.01 \
 --epsilon_decay 0.99 \
---lr 1e-6 \
+--lr 1e-4 \
+--optimizer RMSprop \
 --N 100 \
 --capacity 10000 \
---save_result_path ../results/DQN/results.npy
+--save_result_path ../results/DQN/results_RMSprop_bacth8_lr4.npy
 
 for gpu in $gpus
 do
