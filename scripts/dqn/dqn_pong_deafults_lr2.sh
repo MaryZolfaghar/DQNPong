@@ -21,7 +21,6 @@ nvidia_fancontrol full $gpu
 done
 
 python train.py \
---use_cuda \
 --seed 1 \
 --batch_size 32 \
 --num_frames 1000000 \

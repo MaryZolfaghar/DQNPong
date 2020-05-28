@@ -23,8 +23,6 @@ from models.dqn import QLearner, compute_td_loss, ReplayBuffer
 
 parser = argparse.ArgumentParser()
 # CUDA
-parser.add_argument('--use_cuda', action='store_true',
-                    help='Use GPU, if available')
 parser.add_argument('--seed', type=int, default=1,
                     help='Random seed')
 
@@ -61,12 +59,9 @@ parser.add_argument('--save_result_path', default='../results/DQN/results.npy',
 
 def main(args):
     # CUDA
-    if args.use_cuda:
-        use_cuda = torch.cuda.is_available()
-        device = torch.device("cuda:0" if use_cuda else "cpu")
-    else:
-        use_cuda = False
-        device = "cpu"
+
+    use_cuda = torch.cuda.is_available()
+    device = torch.device("cuda:0" if use_cuda else "cpu")
     print("Using cuda: ", use_cuda)
 
     # Environment
