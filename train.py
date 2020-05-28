@@ -34,7 +34,6 @@ parser.add_argument('--batch_size', type=int, default=32,
 parser.add_argument('--num_frames', type=int, default=1000000,
                     help='')
 # Training
-
 parser.add_argument('--gamma', type=float, default=0.99,
                     help='Temporal discounting parameter')
 parser.add_argument('--epsilon_start', type=float, default=1.0,
@@ -81,7 +80,8 @@ def main(args):
     torch.manual_seed(args.seed)
 
     # Initializing
-    replay_buffer = ReplayBuffer(args.capacity)
+    replay_initial = args.capacity
+    replay_buffer = ReplayBuffer(replay_initial)
 
     model = QLearner(env, args, replay_buffer)
 
