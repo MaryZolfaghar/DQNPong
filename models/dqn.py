@@ -78,6 +78,8 @@ def compute_td_loss(model, batch_size, gamma, replay_buffer, N):
     # TODO: Implement the Temporal Difference Loss
     q_value = model.forward(state)
     next_q_value = model.forward(next_state)
+    print('-----------------------next_q_value', next_q_value, '\n')
+    print('-----------------------q_value', q_value, '\n')
 
     next = []
     for ii, dn in enumerate(done):
