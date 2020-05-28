@@ -78,8 +78,8 @@ def compute_td_loss(model, batch_size, gamma, replay_buffer, N):
     # TODO: Implement the Temporal Difference Loss
     q_value = model.forward(state)
     next_q_value = model.forward(next_state)
-    print('-----------------------next_q_value', next_q_value, '\n')
-    print('-----------------------q_value', q_value, '\n')
+    # print('-----------------------next_q_value', next_q_value, '\n')
+    # print('-----------------------q_value', q_value, '\n')
 
     next = []
     # next = torch.zeros()
@@ -92,10 +92,13 @@ def compute_td_loss(model, batch_size, gamma, replay_buffer, N):
     current = [q_value[ii,act] for ii, act in enumerate(action)]
 
     print('-----------------------len of next is,', len(next), type(next), next, '\n')
-    print('--------------len of current is,', len(current), type(current), '\n')
+    print('--------------len of current is,', len(current), type(current),current, '\n')
 
     current = Variable(torch.FloatTensor(np.float32(current)), requires_grad=True)
+    next = Variable(torch.FloatTensor(np.float32(next)), requires_grad=True)
 
+    print('-----------------------len of next is,', len(next), type(next), next, '\n')
+    print('--------------len of current is,', len(current), type(current),current, '\n')
     # print('-----------------------len of next is,', len(next), type(next), naxt, '\n')
     # print('--------------len of current is,', len(current), type(current), '\n')
     # aa=torch.FloatTensor(np.float32(next))
