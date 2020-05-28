@@ -122,7 +122,7 @@ def main(args):
             episode_reward = 0
 
         if len(replay_buffer) > replay_initial:
-            loss = compute_td_loss(model, args.batch_size, args.gamma, replay_buffer)
+            loss = compute_td_loss(model, args.batch_size, args.gamma, replay_buffer, args.N)
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
