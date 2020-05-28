@@ -6,7 +6,7 @@
 #SBATCH -c 2
 
 
-sbatch dqn_pong_deafults_lr2.sh
-sbatch dqn_pong_deafults_lr4.sh
-sbatch qn_pong_RMSprop_bacth8_lr4.sh
-sbatch dqn_pong_RMSprop_lr4.sh
+sbatch scripts/dqn/dqn_pong_deafults_lr2.sh
+sbatch scripts/dqn/dqn_pong_deafults_lr4.sh
+sbatch scripts/dqn/qn_pong_RMSprop_bacth8_lr4.sh
+sbatch scripts/dqn/dqn_pong_RMSprop_lr4.sh
