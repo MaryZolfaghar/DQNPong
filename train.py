@@ -81,7 +81,7 @@ def main(args):
     torch.manual_seed(args.seed)
 
     # Initializing
-    replay_buffer = ReplayBuffer(10000)
+    replay_buffer = ReplayBuffer(args.capacity)
 
     model = QLearner(env, args, replay_buffer)
 

@@ -24,6 +24,7 @@ class QLearner(nn.Module):
         self.env = env
         self.input_shape = self.env.observation_space.shape
         self.num_actions = self.env.action_space.n
+        self.N = args.N
 
         self.features = nn.Sequential(
             nn.Conv2d(self.input_shape[0], 32, kernel_size=8, stride=4),
@@ -78,18 +79,18 @@ def compute_td_loss(model, batch_size, gamma, replay_buffer):
     q_value = model.forward(state)
     next_q_value = model.forward(next_state)
 
-    target = reward + gamma*torch.max(next_q_value)
+    next = reward + (gamma ** self.N ) * torch.max(next_q_value)
     current = [q_value[ii,act] for ii, act in enumerate(action)]
     current = Variable(torch.FloatTensor(np.float32(current)), requires_grad=True)
 
-    loss = torch.sqrt(torch.mean((current - target)**2))
+    loss = torch.sqrt(torch.mean((current - next)**2))
     ######## YOUR CODE HERE! ########
     return loss
 
 
 class ReplayBuffer(object):
-    def __init__(self, args):
-        self.buffer = deque(maxlen=args.capacity) #Returns a new deque object initialized left-to-right
+    def __init__(self, capacity):
+        self.buffer = deque(maxlen=capacity) #Returns a new deque object initialized left-to-right
 
     def push(self, state, action, reward, next_state, done):
         state = np.expand_dims(state, 0)
