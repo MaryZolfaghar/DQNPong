@@ -89,7 +89,7 @@ def compute_td_loss(model, batch_size, gamma, replay_buffer, N):
     next = np.concatenate(next)
     current = [q_value[ii,act] for ii, act in enumerate(action)]
 
-    print('len of next is,', len(next), type(next) '\n')
+    print('len of next is,', len(next), type(next), '\n')
     print('len of current is,', len(current), type(current), '\n')
 
     current = Variable(torch.FloatTensor(np.float32(current)), requires_grad=True)
