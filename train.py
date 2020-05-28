@@ -52,7 +52,7 @@ parser.add_argument('--lr', type=float, default=0.00001,
                     help='Learning rate of optimizer (default from mjacar)')
 
 # ReplayBuffer
-parser.add_argument('--capacity', type=int, default=10000,
+parser.add_argument('--capacity', type=int, default=100000,
                     help='Number of states to store in the replay buffer')
 
 # Saving Results
@@ -80,8 +80,8 @@ def main(args):
     torch.manual_seed(args.seed)
 
     # Initializing
-    replay_initial = args.capacity
-    replay_buffer = ReplayBuffer(replay_initial)
+    replay_initial = 10000
+    replay_buffer = ReplayBuffer(args.capacity)
 
     model = QLearner(env, args, replay_buffer)
 
@@ -130,9 +130,11 @@ def main(args):
             losses.append(loss.data.cpu().numpy())
 
         if frame_idx % 10000 == 0 and len(replay_buffer) <= replay_initial:
-            print("Preparing replay buffer in frame:", frame_idx,
+            print("Frame:", frame_idx,
+                  "Loss:", np.mean(losses),
                   "Total Rewards:", all_rewards[-1],
                   "Average Rewards:", np.mean(all_rewards),
+                  "Last-10 average reward:", np.mean(all_rewards[-10:]),
                   "Time:", time_history[-1])
             # print('#Frame: %d, preparing replay buffer' % frame_idx)
         if frame_idx % 10000 == 0 and len(replay_buffer) > replay_initial:
@@ -140,9 +142,10 @@ def main(args):
                   "Loss:", np.mean(losses),
                   "Total Rewards:", all_rewards[-1],
                   "Average Rewards:", np.mean(all_rewards),
+                  "Last-10 average reward:", np.mean(all_rewards[-10:]),
                   "Time:", time_history[-1])
-            print('#Frame: %d, Loss: %f' % (frame_idx, np.mean(losses)))
-            print('Last-10 average reward: %f' % np.mean(all_rewards[-10:]))
+            # print('#Frame: %d, Loss: %f' % (frame_idx, np.mean(losses)))
+            # print('Last-10 average reward: %f' % np.mean(all_rewards[-10:]))
         results = [losses, all_rewards, time_history]
         np.save(args.save_result_path, results)
 

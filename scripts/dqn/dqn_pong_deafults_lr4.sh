@@ -32,7 +32,7 @@ python train.py \
 --lr 1e-4 \
 --optimizer Adam \
 --N 100 \
---capacity 10000 \
+--capacity 100000 \
 --save_result_path ../results/DQN/results_default_lr4.npy
 
 for gpu in $gpus
