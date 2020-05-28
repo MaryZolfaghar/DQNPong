@@ -88,12 +88,15 @@ def compute_td_loss(model, batch_size, gamma, replay_buffer, N):
         else:
             next.append(reward + (gamma ** N ) * max(next_q_value[ii].detach().numpy()))
     print('-----------------------len of next is,', len(next), type(next), '\n')
-    next = Variable(torch.FloatTensor(np.float32(next)))
+
     current = [q_value[ii,act] for ii, act in enumerate(action)]
     current = Variable(torch.FloatTensor(np.float32(current)), requires_grad=True)
 
     print('-----------------------len of next is,', len(next), type(next), '\n')
     print('--------------len of current is,', len(current), type(current), '\n')
+    aa=torch.FloatTensor(np.float32(next))
+    # next = Variable(torch.FloatTensor(np.float32(next)))
+    print('-----------------------len of aa is,', len(aa), type(aa), '\n')
 
     loss = torch.sqrt(torch.mean((next - current)**2))
     ######## YOUR CODE HERE! ########
