@@ -31,7 +31,7 @@ python train.py \
 --epsilon_decay 0.99 \
 --lr 1e-4 \
 --optimizer Adam \
---N 100 \
+--N 1 \
 --capacity 100000 \
 --save_result_path ../results/DQN/results_default_lr4.npy
 

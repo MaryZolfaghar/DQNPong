@@ -30,7 +30,7 @@ python train.py \
 --epsilon_final 0.01 \
 --epsilon_decay 0.99 \
 --lr 1e-2 \
---N 100 \
+--N 1 \
 --capacity 100000 \
 --save_result_path ../results/DQN/results_default_lr2.npy
 
