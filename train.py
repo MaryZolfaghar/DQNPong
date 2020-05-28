@@ -45,6 +45,12 @@ parser.add_argument('--epsilon_decay', type=float, default=0.99,
                     help='Decay for probability of selecting random action') # epsilon_decay = 30000
 parser.add_argument('--N', type=int, default=100,
                     help='Horizon for N-step Q-estimates')
+# Optimization
+parser.add_argument('--optimizer', choices=['Adam','RMSprop'],
+                    default='Adam',
+                    help='Optimizer to use for training')
+parser.add_argument('--lr', type=float, default=0.00001,
+                    help='Learning rate of optimizer (default from mjacar)')
 
 # ReplayBuffer
 parser.add_argument('--capacity', type=int, default=10000,
@@ -73,6 +79,21 @@ def main(args):
     # Random seed
     env.seed(args.seed)
     torch.manual_seed(args.seed)
+
+    # Initializing
+    replay_buffer = ReplayBuffer(10000)
+
+    model = QLearner(env, args, replay_buffer)
+
+    if args.optimizer == 'Adam':
+        optimizer = optim.Adam(model.parameters(), args.lr)
+    elif args.optimizer == 'RMSprop':
+        optimizer = optim.RMSprop(model.parameters(), args.lr)
+
+    if USE_CUDA:
+        model = model.cuda()
+
+
 
     # Training loop
     epsilon_by_frame = lambda frame_idx: args.epsilon_final + (args.epsilon_start - args.epsilon_final) * math.exp(-1. * frame_idx / args.epsilon_decay)
