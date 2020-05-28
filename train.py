@@ -84,7 +84,7 @@ def main(args):
 
     state = env.reset()
 
-    for frame_idx in range(1, num_frames + 1):
+    for frame_idx in range(1, args.num_frames + 1):
         start_time = time.time()
 
         epsilon = epsilon_by_frame(frame_idx)
