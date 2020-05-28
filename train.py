@@ -82,7 +82,6 @@ def main(args):
     # Initializing
     replay_initial = 10000
     replay_buffer = ReplayBuffer(args.capacity)
-
     model = QLearner(env, args, replay_buffer)
 
     if args.optimizer == 'Adam':
@@ -123,7 +122,7 @@ def main(args):
             episode_reward = 0
 
         if len(replay_buffer) > replay_initial:
-            loss = compute_td_loss(model, batch_size, gamma, replay_buffer)
+            loss = compute_td_loss(model, args.batch_size, args.gamma, replay_buffer)
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
