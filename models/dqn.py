@@ -85,9 +85,9 @@ def compute_td_loss(model, batch_size, gamma, replay_buffer, N):
     # next = torch.zeros()
     for ii, dn in enumerate(done):
         if dn:
-            next.append(reward)
+            next.append(reward[ii])
         else:
-            next.append(reward + (gamma ** N ) * max(next_q_value[ii].detach().numpy()))
+            next.append(reward[ii] + (gamma ** N ) * np.max(next_q_value[ii].detach().cpu().numpy()))
 
     current = [q_value[ii,act] for ii, act in enumerate(action)]
 
