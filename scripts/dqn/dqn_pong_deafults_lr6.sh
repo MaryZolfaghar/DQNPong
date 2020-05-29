@@ -14,11 +14,7 @@ source /usr/local/anaconda3/etc/profile.d/conda.sh
 conda activate RLPongDQN
 
 gpus=$(echo $CUDA_VISIBLE_DEVICES | tr "," "\n")
-for gpu in $gpus
-do
-echo "Setting fan for" $gpu "to full"
-nvidia_fancontrol full $gpu
-done
+echo "gpu" $gpu
 
 python3 train.py \
 --seed 1 \
@@ -34,9 +30,3 @@ python3 train.py \
 --capacity 100000 \
 --save_result_path ../results/DQN/results_default_lr6.npy \
 --save_model_path ../results/DQN/model_default_lr6.pth
-
-for gpu in $gpus
-do
-echo "Setting fan for " $gpu "back to auto"
-nvidia_fancontrol auto $gpu
-done
