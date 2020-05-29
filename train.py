@@ -90,7 +90,7 @@ def main(args):
         model = model.cuda()
 
 
-
+    print('start 1')
     # Training loop
     epsilon_by_frame = lambda frame_idx: args.epsilon_final + (args.epsilon_start - args.epsilon_final) * math.exp(-1. * frame_idx / args.epsilon_decay)
 
@@ -101,7 +101,9 @@ def main(args):
 
     state = env.reset()
     start_time_frame = time.time()
+    print('start 2')
     for frame_idx in range(1, args.num_frames + 1):
+        print('start frame_idx', frame_idx)
         start_time = time.time()
 
         epsilon = epsilon_by_frame(frame_idx)
