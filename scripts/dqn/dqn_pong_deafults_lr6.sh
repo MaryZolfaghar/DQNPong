@@ -27,11 +27,12 @@ python train.py \
 --gamma 0.99 \
 --epsilon_start 1.0 \
 --epsilon_final 0.01 \
---epsilon_decay 0.99 \
---lr 1e-2 \
+--epsilon_decay 30000 \
+--lr 0.000001 \
+--optimizer Adam \
 --N 1 \
 --capacity 100000 \
---save_result_path ../results/DQN/results_default_lr2.npy
+--save_result_path ../results/DQN/results_default_lr6.npy
 
 for gpu in $gpus
 do

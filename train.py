@@ -59,7 +59,7 @@ parser.add_argument('--save_result_path', default='../results/DQN/results.npy',
 
 def main(args):
     # CUDA
-
+    
     use_cuda = torch.cuda.is_available()
     device = torch.device("cuda:0" if use_cuda else "cpu")
     print("Using cuda: ", use_cuda)
