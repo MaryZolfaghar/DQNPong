@@ -115,12 +115,14 @@ def main(args):
         state = next_state
         episode_reward += reward
         if done:
+            print('done')
             state = env.reset()
             all_rewards.append(episode_reward)
             time_history.append(time.time() - start_time)
             episode_reward = 0
 
         if len(replay_buffer) > replay_initial:
+            print('update')
             loss = compute_td_loss(model, args.batch_size, args.gamma, replay_buffer, args.N)
             optimizer.zero_grad()
             loss.backward()
