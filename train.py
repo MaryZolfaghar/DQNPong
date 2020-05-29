@@ -56,6 +56,8 @@ parser.add_argument('--capacity', type=int, default=100000,
 # Saving Results
 parser.add_argument('--save_result_path', default='../results/DQN/results.npy',
                     help='Path to output data file with score history')
+parser.add_argument('--save_model_path', default='../results/DQN/weights_only.pth',
+                    help='Path to output data file with score history')
 
 def main(args):
     # CUDA
@@ -139,7 +141,11 @@ def main(args):
             # print('#Frame: %d, Loss: %f' % (frame_idx, np.mean(losses)))
             # print('Last-10 average reward: %f' % np.mean(all_rewards[-10:]))
         results = [losses, all_rewards, time_history]
+        torch.save(model.state_dict(), args.save_model_path)
         np.save(args.save_result_path, results)
+
+        # model_new = NeuralNet()
+        # model_new.load_state_dict(torch.load('weights_only.pth'))
 
 if __name__ == '__main__':
     args = parser.parse_args()
