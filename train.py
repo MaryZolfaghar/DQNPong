@@ -124,7 +124,7 @@ def main(args):
             losses.append(loss.data.cpu().numpy())
 
         if frame_idx % 10000 == 0 and len(replay_buffer) <= replay_initial:
-            print("Preparing replay buffer -- ",
+            print("Preparing replay buffer with len -- ", len(replay_buffer),
                   "Frame:", frame_idx,
                   "Total time so far:", (time.time() - start_time_frame))
             # print('#Frame: %d, preparing replay buffer' % frame_idx)
