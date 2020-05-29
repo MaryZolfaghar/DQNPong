@@ -17,7 +17,7 @@ conda activate RLPongDQN
 gpus=$(echo $CUDA_VISIBLE_DEVICES | tr "," "\n")
 echo "gpu" $gpu
 
-python train.py \
+python3 train.py \
 --seed 1 \
 --batch_size 32 \
 --num_frames 1000000 \

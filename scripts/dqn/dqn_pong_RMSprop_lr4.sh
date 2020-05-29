@@ -21,7 +21,7 @@ echo "Setting fan for" $gpu "to full"
 nvidia_fancontrol full $gpu
 done
 
-python train.py \
+python3 train.py \
 --seed 1 \
 --batch_size 32 \
 --num_frames 1000000 \

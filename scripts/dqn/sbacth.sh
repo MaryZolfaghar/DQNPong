@@ -8,6 +8,7 @@
 
 # sbatch scripts/dqn/dqn_pong_deafults_lr4.sh
 sbatch scripts/dqn/dqn_pong_deafults_lr5.sh
+sbatch scripts/dqn/dqn_pong_deafults_lr2e_4.sh
 # sbatch scripts/dqn/dqn_pong_deafults_lr6.sh
 # sbatch scripts/dqn/dqn_pong_deafults_lr4.sh
 # sbatch scripts/dqn/qn_pong_RMSprop_bacth8_lr4.sh
