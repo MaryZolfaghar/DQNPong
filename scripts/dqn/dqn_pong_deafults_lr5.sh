@@ -11,7 +11,8 @@ export PYTHONUNBUFFERED=1
 echo Running on $HOSTNAME
 
 source /usr/local/anaconda3/etc/profile.d/conda.sh
-conda activate DeepLearningEEG
+# conda activate DeepLearningEEG
+conda activate PongDQN
 
 gpus=$(echo $CUDA_VISIBLE_DEVICES | tr "," "\n")
 for gpu in $gpus
