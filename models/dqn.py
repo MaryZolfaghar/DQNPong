@@ -54,7 +54,8 @@ class QLearner(nn.Module):
         action = []
 
         if random.random() > epsilon:
-            state   = Variable(torch.FloatTensor(np.float32(state)).unsqueeze(0), requires_grad=True)
+            state   = Variable(torch.FloatTensor(np.float32(state)).unsqueeze(0), \
+                               requires_grad=True)
             ######## YOUR CODE HERE! ########
             # TODO: Given state, you should write code to get the Q value and chosen action
             # Complete the R.H.S. of the following 2 lines and uncomment them
@@ -78,16 +79,14 @@ def compute_td_loss(model, batch_size, gamma, replay_buffer, N):
     # TODO: Implement the Temporal Difference Loss
     q_value = model.forward(state)
     next_q_value = model.forward(next_state)
-    # print('-----------------------next_q_value', next_q_value, '\n')
-    # print('-----------------------q_value', q_value, '\n')
 
     next = []
-    # next = torch.zeros()
     for ii, dn in enumerate(done):
         if dn:
             next.append(reward[ii])
         else:
-            next.append(reward[ii] + (gamma ** N ) * np.max(next_q_value[ii].detach().cpu().numpy()))
+            next.append(reward[ii] + (gamma ** N ) * \
+                        np.max(next_q_value[ii].detach().cpu().numpy()))
 
     current = [q_value[ii,act] for ii, act in enumerate(action)]
     current = Variable(torch.FloatTensor(np.float32(current)), requires_grad=True)
@@ -100,7 +99,8 @@ def compute_td_loss(model, batch_size, gamma, replay_buffer, N):
 
 class ReplayBuffer(object):
     def __init__(self, capacity):
-        self.buffer = deque(maxlen=capacity) #Returns a new deque object initialized left-to-right
+        #Returns a new deque object initialized left-to-right
+        self.buffer = deque(maxlen=capacity)
 
     def push(self, state, action, reward, next_state, done):
         state = np.expand_dims(state, 0)

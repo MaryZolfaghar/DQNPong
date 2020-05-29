@@ -12,14 +12,10 @@ echo Running on $HOSTNAME
 
 source /usr/local/anaconda3/etc/profile.d/conda.sh
 # conda activate DeepLearningEEG
-conda activate PongDQN
+conda activate RLPongDQN
 
 gpus=$(echo $CUDA_VISIBLE_DEVICES | tr "," "\n")
-for gpu in $gpus
-do
-echo "Setting fan for" $gpu "to full"
-nvidia_fancontrol full $gpu
-done
+echo "gpu" $gpu
 
 python train.py \
 --seed 1 \
@@ -35,9 +31,3 @@ python train.py \
 --capacity 100000 \
 --save_result_path ../results/DQN/results_default_lr5.npy \
 --save_model_path ../results/DQN/model_default_lr5.pth
-
-for gpu in $gpus
-do
-echo "Setting fan for " $gpu "back to auto"
-nvidia_fancontrol auto $gpu
-done
