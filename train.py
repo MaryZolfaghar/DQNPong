@@ -59,7 +59,7 @@ parser.add_argument('--save_result_path', default='../results/DQN/results.npy',
 
 def main(args):
     # CUDA
-    
+
     use_cuda = torch.cuda.is_available()
     device = torch.device("cuda:0" if use_cuda else "cpu")
     print("Using cuda: ", use_cuda)
@@ -98,7 +98,7 @@ def main(args):
     time_history = [] # records time (in sec) of each episode
 
     state = env.reset()
-
+    start_time_frame = time.time()
     for frame_idx in range(1, args.num_frames + 1):
         start_time = time.time()
 
@@ -124,12 +124,9 @@ def main(args):
             losses.append(loss.data.cpu().numpy())
 
         if frame_idx % 10000 == 0 and len(replay_buffer) <= replay_initial:
-            print("Frame:", frame_idx,
-                  "Loss:", np.mean(losses),
-                  "Total Rewards:", all_rewards[-1],
-                  "Average Rewards:", np.mean(all_rewards),
-                  "Last-10 average reward:", np.mean(all_rewards[-10:]),
-                  "Time:", time_history[-1])
+            print("Preparing replay buffer -- ",
+                  "Frame:", frame_idx,
+                  "Total time so far:", (time.time() - start_time_frame))
             # print('#Frame: %d, preparing replay buffer' % frame_idx)
         if frame_idx % 10000 == 0 and len(replay_buffer) > replay_initial:
             print("Frame:", frame_idx,
@@ -137,7 +134,8 @@ def main(args):
                   "Total Rewards:", all_rewards[-1],
                   "Average Rewards:", np.mean(all_rewards),
                   "Last-10 average reward:", np.mean(all_rewards[-10:]),
-                  "Time:", time_history[-1])
+                  "Time:", time_history[-1],
+                  "Total time so far:", (time.time() - start_time_frame))
             # print('#Frame: %d, Loss: %f' % (frame_idx, np.mean(losses)))
             # print('Last-10 average reward: %f' % np.mean(all_rewards[-10:]))
         results = [losses, all_rewards, time_history]
