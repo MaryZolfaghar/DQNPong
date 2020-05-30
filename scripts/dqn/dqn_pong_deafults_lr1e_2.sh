@@ -12,7 +12,6 @@ echo Running on $HOSTNAME
 
 source /usr/local/anaconda3/etc/profile.d/conda.sh
 conda activate RLPongDQN
-# conda install pytorch torchvision cudatoolkit=10.1 -c pytorch
 
 gpus=$(echo $CUDA_VISIBLE_DEVICES | tr "," "\n")
 echo "gpu" $gpu
@@ -24,9 +23,10 @@ python3 train.py \
 --gamma 0.99 \
 --epsilon_start 1.0 \
 --epsilon_final 0.01 \
---epsilon_decay 0.99 \
---lr 1e-4 \
---optimizer RMSprop \
+--epsilon_decay 30000 \
+--lr 0.01 \
+--optimizer Adam \
 --N 1 \
 --capacity 100000 \
---save_result_path ../results/DQN/results_RMSprop_lr4.npy
+--save_result_path ../results/DQN/results_default_lr1e_2.npy \
+--save_model_path ../results/DQN/model_default_lr1e_2.pth

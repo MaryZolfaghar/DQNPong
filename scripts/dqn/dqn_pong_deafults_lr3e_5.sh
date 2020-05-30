@@ -18,14 +18,15 @@ echo "gpu" $gpu
 
 python3 train.py \
 --seed 1 \
---batch_size 8 \
+--batch_size 32 \
 --num_frames 1000000 \
 --gamma 0.99 \
 --epsilon_start 1.0 \
 --epsilon_final 0.01 \
---epsilon_decay 0.99 \
---lr 1e-4 \
---optimizer RMSprop \
+--epsilon_decay 30000 \
+--lr 0.00003 \
+--optimizer Adam \
 --N 1 \
 --capacity 100000 \
---save_result_path ../results/DQN/results_RMSprop_bacth8_lr4.npy
+--save_result_path ../results/DQN/results_default_lr3e_5.npy \
+--save_model_path ../results/DQN/model_default_lr3e_5.pth
