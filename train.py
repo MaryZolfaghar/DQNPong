@@ -147,7 +147,7 @@ def main(args):
                 losses.append(loss.data.cpu().numpy())
                 num_param_updates += 1
             # Periodically update the target network by Q network to target Q network
-            if num_param_updates % target_update_freq == 0:
+            if num_param_updates % args.target_update_freq == 0:
                 model_target_Q.load_state_dict(model_Q.state_dict())
 
         if frame_idx % 10000 == 0 and len(replay_buffer) <= replay_initial:
@@ -170,7 +170,7 @@ def main(args):
             # print('#Frame: %d, Loss: %f' % (frame_idx, np.mean(losses)))
             # print('Last-10 average reward: %f' % np.mean(all_rewards[-10:]))
 
-        if frame_idx % save_freq_frame == 0:
+        if frame_idx % args.save_freq_frame == 0:
             results = [losses, all_rewards, time_history]
             torch.save(model_Q.state_dict(), args.save_model_path)
             np.save(args.save_result_path, results)
