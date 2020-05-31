@@ -19,5 +19,5 @@ echo "gpu" $gpu
 
 python3 train.py \
 --lr 0.00001 \
---save_result_path ../results/DQN/results_default_lr5.npy \
---save_model_path ../results/DQN/model_default_lr5.pth
+--save_result_path ../results/DQN/results_default_lr1e_5.npy \
+--save_model_path ../results/DQN/model_default_lr1e_5.pth

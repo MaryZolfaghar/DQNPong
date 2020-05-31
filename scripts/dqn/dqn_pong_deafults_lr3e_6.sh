@@ -17,8 +17,6 @@ gpus=$(echo $CUDA_VISIBLE_DEVICES | tr "," "\n")
 echo "gpu" $gpu
 
 python3 train.py \
---lr 0.0001 \
---save_result_path ../results/DQN/results_default_lr4.npy \
---save_model_path ../results/DQN/model_default_lr4.pth
-# --save_result_path ../results/DQN/results_default_lr1e_4.npy \
-# --save_model_path ../results/DQN/model_default_lr1e_4.pth
+--lr 0.000003 \
+--save_result_path ../results/DQN/results_default_lr3e_6.npy \
+--save_model_path ../results/DQN/model_default_lr3e_6.pth

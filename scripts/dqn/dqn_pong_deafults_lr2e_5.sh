@@ -11,14 +11,13 @@ export PYTHONUNBUFFERED=1
 echo Running on $HOSTNAME
 
 source /usr/local/anaconda3/etc/profile.d/conda.sh
+# conda activate DeepLearningEEG
 conda activate RLPongDQN
 
 gpus=$(echo $CUDA_VISIBLE_DEVICES | tr "," "\n")
 echo "gpu" $gpu
 
 python3 train.py \
---lr 0.0001 \
---save_result_path ../results/DQN/results_default_lr4.npy \
---save_model_path ../results/DQN/model_default_lr4.pth
-# --save_result_path ../results/DQN/results_default_lr1e_4.npy \
-# --save_model_path ../results/DQN/model_default_lr1e_4.pth
+--lr 0.00002 \
+--save_result_path ../results/DQN/results_default_lr2e_5.npy \
+--save_model_path ../results/DQN/model_default_lr2e_5.pth
