@@ -120,12 +120,12 @@ def main(args):
 
         next_state, reward, done, _ = env.step(action)
         replay_buffer.push(state, action, reward, next_state, done)
-        print('Frame', frame_idx, \
-              # 'state shape', state.shape, \
-              'action', action, \
-              # 'next_state shape', next_state.shape, \
-              'reward', reward, \
-              'done', done, '\n')
+        # print('Frame', frame_idx, \
+        #       # 'state shape', state.shape, \
+        #       'action', action, \
+        #       # 'next_state shape', next_state.shape, \
+        #       'reward', reward, \
+        #       'done', done, '\n')
 
         state = next_state
         episode_reward += reward
