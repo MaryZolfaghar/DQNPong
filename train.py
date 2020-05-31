@@ -62,9 +62,10 @@ parser.add_argument('--save_result_path', default='../results/DQN/results.npy',
                     help='Path to output data file with score history')
 parser.add_argument('--save_model_path', default='../results/DQN/weights_only.pth',
                     help='Path to output data file for saving the trainned model')
+parser.add_argument('--save_interim_path', default='../results/DQN/interim/',
+                    help='Path to interim output data file with score history')
 parser.add_argument('--save_freq_frame', type=int, default=100000,
                     help='Save model and results every save_freq_frame times')
-
 
 def main(args):
     # CUDA
@@ -107,7 +108,9 @@ def main(args):
     episode_reward = 0
     num_param_updates = 0
     mean_reward = -float('nan')
+    mean_reward2 = -float('nan')
     best_mean_reward = -float('inf')
+    best_mean_reward2 = -float('inf')
     time_history = [] # records time (in sec) of each episode
 
     state = env.reset()
@@ -158,13 +161,17 @@ def main(args):
 
         if frame_idx % 10000 == 0 and len(replay_buffer) > replay_initial:
             mean_reward = np.mean(all_rewards[-10:])
+            mean_reward2 = np.mean(all_rewards[-100:])
             best_mean_reward = max(best_mean_reward, mean_reward)
+            best_mean_reward2 = max(best_mean_reward2, mean_reward2)
             print("Frame:", frame_idx,
                   "Loss:", np.mean(losses),
                   "Total Rewards:", all_rewards[-1],
                   "Average Rewards over all frames:", np.mean(all_rewards),
                   "Last-10 average reward:", mean_reward,
                   "Best mean reward of last-10:", best_mean_reward,
+                  "Last-100 average reward:", mean_reward2,,
+                  "Best mean reward of last-100:", best_mean_reward2,
                   "Time:", time_history[-1],
                   "Total time so far:", (time.time() - start_time_frame))
             # print('#Frame: %d, Loss: %f' % (frame_idx, np.mean(losses)))
@@ -174,6 +181,14 @@ def main(args):
             results = [losses, all_rewards, time_history]
             torch.save(model_Q.state_dict(), args.save_model_path)
             np.save(args.save_result_path, results)
+        if frame_idx % 500000 == 0:
+            results = [losses, all_rewards, time_history]
+
+            torch.save(model_Q.state_dict(), args.save_interim_path + \
+                      'model_lr%s_frame_%s.pth' %(lr,frame_idx))
+            np.save(args.save_interim_path + \
+                   'results_lr%s_frame_%s.npy' %(lr,frame_idx), results)
+
             # model_new = NeuralNet()
             # model_new.load_state_dict(torch.load('weights_only.pth'))
 

@@ -23,4 +23,5 @@
 # sbatch scripts/dqn/dqn_pong_deafults_lr2e_5.sh # Last-10:  Best:
 # sbatch scripts/dqn/dqn_pong_deafults_lr1e_6.sh # Last-10:  Best:
 # sbatch scripts/dqn/dqn_pong_deafults_lr3e_6.sh # Last-10:  Best:
-sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_diffKernel.sh
+# sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_diffKernel.sh
+sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes.sh
