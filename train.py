@@ -123,12 +123,6 @@ def main(args):
 
         next_state, reward, done, _ = env.step(action)
         replay_buffer.push(state, action, reward, next_state, done)
-        # print('Frame', frame_idx, \
-        #       # 'state shape', state.shape, \
-        #       'action', action, \
-        #       # 'next_state shape', next_state.shape, \
-        #       'reward', reward, \
-        #       'done', done, '\n')
 
         state = next_state
         episode_reward += reward
@@ -157,7 +151,6 @@ def main(args):
             print("Preparing replay buffer with len -- ", len(replay_buffer),
                   "Frame:", frame_idx,
                   "Total time so far:", (time.time() - start_time_frame))
-            # print('#Frame: %d, preparing replay buffer' % frame_idx)
 
         if frame_idx % 10000 == 0 and len(replay_buffer) > replay_initial:
             mean_reward = np.mean(all_rewards[-10:])
@@ -174,8 +167,6 @@ def main(args):
                   "Best mean reward of last-100:", best_mean_reward2,
                   "Time:", time_history[-1],
                   "Total time so far:", (time.time() - start_time_frame))
-            # print('#Frame: %d, Loss: %f' % (frame_idx, np.mean(losses)))
-            # print('Last-10 average reward: %f' % np.mean(all_rewards[-10:]))
 
         if frame_idx % args.save_freq_frame == 0:
             results = [losses, all_rewards, time_history]
