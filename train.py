@@ -160,8 +160,8 @@ def main(args):
                   "Loss:", np.mean(losses),
                   "Total Rewards:", all_rewards[-1],
                   "Average Rewards over all frames:", np.mean(all_rewards),
-                  "Last-10 average reward:", mean_reward),
-                  "Best mean reward of last-10:", best_mean_reward),
+                  "Last-10 average reward:", mean_reward,
+                  "Best mean reward of last-10:", best_mean_reward,
                   "Time:", time_history[-1],
                   "Total time so far:", (time.time() - start_time_frame))
             # print('#Frame: %d, Loss: %f' % (frame_idx, np.mean(losses)))
