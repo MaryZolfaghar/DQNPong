@@ -170,7 +170,7 @@ def main(args):
                   "Average Rewards over all frames:", np.mean(all_rewards),
                   "Last-10 average reward:", mean_reward,
                   "Best mean reward of last-10:", best_mean_reward,
-                  "Last-100 average reward:", mean_reward2,,
+                  "Last-100 average reward:", mean_reward2,
                   "Best mean reward of last-100:", best_mean_reward2,
                   "Time:", time_history[-1],
                   "Total time so far:", (time.time() - start_time_frame))
