@@ -30,6 +30,9 @@ parser.add_argument('--batch_size', type=int, default=16,
                     help='')
 parser.add_argument('--num_frames', type=int, default=1000000,
                     help='')
+# Environment
+parser.add_argument('--render', type=int, default=0,
+                    help='Rendering the environment state')
 # Training
 parser.add_argument('--gamma', type=float, default=0.99,
                     help='Temporal discounting parameter')
@@ -123,7 +126,7 @@ def main(args):
               'next_state shape', next_state.shape, \
               'reward', reward, \
               'done', done, '\n')
-              
+
         state = next_state
         episode_reward += reward
         if done:
@@ -132,7 +135,7 @@ def main(args):
             time_history.append(time.time() - start_time)
             episode_reward = 0
 
-        if render:
+        if args.render==1:
             env.render()
 
         if len(replay_buffer) > replay_initial:
