@@ -94,6 +94,17 @@ def compute_td_loss(model_Q, model_target_Q, batch_size, gamma, replay_buffer, N
     # current = Variable(torch.FloatTensor(np.float32(current)))
     # next = Variable(torch.FloatTensor(np.float32(next)), requires_grad=True)
     target_q_val = target_q_val.view(-1,1)
+
+
+    print('In loss function', \
+          'current_q_value shape', state.shape, \
+          'action shape', action.shape, \
+          'target_q_val shape', next_state.shape, \
+          'reward', reward.shape, \
+          'done', done.shape, '\n')
+
+
+
     # loss = torch.mean((target_q_val - current_q_value)**2))
     loss = F.smooth_l1_loss(current_q_value, target_q_val)
     ######## YOUR CODE HERE! ########
