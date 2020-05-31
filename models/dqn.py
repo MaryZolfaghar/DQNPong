@@ -6,12 +6,14 @@ from collections import deque
 import numpy as np
 import matplotlib.pyplot as plt
 import torch
+import torch.nn.functional as F
 import torch.nn as nn
 import torch.autograd as autograd
 import math, random
 
 Variable = lambda *args, **kwargs: autograd.Variable(*args, **kwargs).cuda() if USE_CUDA else autograd.Variable(*args, **kwargs)
 USE_CUDA = torch.cuda.is_available()
+
 
 class QLearner(nn.Module):
     def __init__(self, env, args, replay_buffer):
@@ -60,39 +62,40 @@ class QLearner(nn.Module):
             # TODO: Given state, you should write code to get the Q value and chosen action
             # Complete the R.H.S. of the following 2 lines and uncomment them
             q_value = self.forward(state)
-            action = torch.argmax(q_value)
+            action = torch.argmax(q_value).item()
             ######## YOUR CODE HERE! ########
         else:
             action = random.randrange(self.env.action_space.n)
         return action
 
-def compute_td_loss(model, batch_size, gamma, replay_buffer, N):
+def compute_td_loss(model_Q, model_target_Q,, batch_size, gamma, replay_buffer, N):
+
     state, action, reward, next_state, done = replay_buffer.sample(batch_size)
 
     state = Variable(torch.FloatTensor(np.float32(state)))
-    next_state = Variable(torch.FloatTensor(np.float32(next_state)), requires_grad=True)
+    next_state = Variable(torch.FloatTensor(np.float32(next_state)))
     action = Variable(torch.LongTensor(action))
     reward = Variable(torch.FloatTensor(reward))
     done = Variable(torch.FloatTensor(done))
 
     ######## YOUR CODE HERE! ########
     # TODO: Implement the Temporal Difference Loss
-    q_value = model.forward(state)
-    next_q_value = model.forward(next_state)
 
-    next = []
-    for ii, dn in enumerate(done):
-        if dn:
-            next.append(reward[ii])
-        else:
-            next.append(reward[ii] + (gamma ** N ) * \
-                        np.max(next_q_value[ii].detach().cpu().numpy()))
+    # Compute current Q value, q_func takes only state and output value for every state-action pair
+    # We choose Q based on action taken.
+    q_value = model_Q.forward(state)
+    current_q_value = q_value.gather(1,action.view(-1,1))
+    # Compute next Q value based on which action gives max Q values
+    # Detach variable from the current graph since we don't want gradients for next Q to propagated
+    with torch.no_grad():
+        next_q_value = model_target_Q.forward(next_state).detach()
+        target_q_value = reward + (1-done) * gamma * torch.max(next_q_value.detach(),dim=1)[0]
 
-    current = [q_value[ii,act] for ii, act in enumerate(action)]
-    current = Variable(torch.FloatTensor(np.float32(current)))
-    next = Variable(torch.FloatTensor(np.float32(next)), requires_grad=True)
-
-    loss = torch.sqrt(torch.mean((next - current)**2))
+    # current = Variable(torch.FloatTensor(np.float32(current)))
+    # next = Variable(torch.FloatTensor(np.float32(next)), requires_grad=True)
+    target_q_val = target_q_val.view(-1,1)
+    # loss = torch.mean((target_q_val - current_q_value)**2))
+    loss = F.smooth_l1_loss(current_q_value, target_q_val)
     ######## YOUR CODE HERE! ########
     return loss
 
@@ -103,8 +106,8 @@ class ReplayBuffer(object):
         self.buffer = deque(maxlen=capacity)
 
     def push(self, state, action, reward, next_state, done):
-        state = np.expand_dims(state, 0)
-        next_state = np.expand_dims(next_state, 0)
+        # state = np.expand_dims(state, 0)
+        # next_state = np.expand_dims(next_state, 0)
 
         self.buffer.append((state, action, reward, next_state, done))
 
@@ -114,21 +117,22 @@ class ReplayBuffer(object):
         # Hint: you may use the python library "random".
 
         batch = random.sample(self.buffer, batch_size)
-        state  = []
-        action = []
-        reward = []
-        next_state = []
-        done = []
-        for sample in batch:
-            state.append(sample[0])
-            action.append(sample[1])
-            reward.append(sample[2])
-            next_state.append(sample[3])
-            done.append(sample[4])
+        state,action,reward,next_state,done = zip(*batch)
+        # state  = []
+        # action = []
+        # reward = []
+        # next_state = []
+        # done = []
+        # for sample in batch:
+        #     state.append(sample[0])
+        #     action.append(sample[1])
+        #     reward.append(sample[2])
+        #     next_state.append(sample[3])
+        #     done.append(sample[4])
 
         # If you are not familiar with the "deque" python library, please google it.
         ######## YOUR CODE HERE! ########
-        return np.concatenate(state), action, reward, np.concatenate(next_state), done
+        return np.array(state), np.array(action), np.array(reward), np.array(next_state), np.array(done)
 
     def __len__(self):
         return len(self.buffer)
