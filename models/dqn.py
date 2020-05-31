@@ -28,15 +28,23 @@ class QLearner(nn.Module):
         self.num_actions = self.env.action_space.n
         self.N = args.N
 
+
+        # self.features = nn.Sequential(
+        #     nn.Conv2d(self.input_shape[0], 32, kernel_size=8, stride=4),
+        #     nn.ReLU(),
+        #     nn.Conv2d(32, 64, kernel_size=4, stride=2),
+        #     nn.ReLU(),
+        #     nn.Conv2d(64, 64, kernel_size=3, stride=1),
+        #     nn.ReLU()
+        # )
         self.features = nn.Sequential(
-            nn.Conv2d(self.input_shape[0], 32, kernel_size=8, stride=4),
+            nn.Conv2d(self.input_shape[0], 32, kernel_size=3, stride=1),
             nn.ReLU(),
-            nn.Conv2d(32, 64, kernel_size=4, stride=2),
+            nn.Conv2d(32, 32, kernel_size=3, stride=1),
             nn.ReLU(),
-            nn.Conv2d(64, 64, kernel_size=3, stride=1),
+            nn.Conv2d(32, 32, kernel_size=3, stride=1),
             nn.ReLU()
         )
-
         self.fc = nn.Sequential(
             nn.Linear(self.feature_size(), 512),
             nn.ReLU(),
@@ -91,17 +99,6 @@ def compute_td_loss(model_Q, model_target_Q, batch_size, gamma, replay_buffer, N
         next_q_value = model_target_Q.forward(next_state).detach()
         target_q_value = reward + (1-done) * gamma * torch.max(next_q_value.detach(),dim=1)[0]
         target_q_value = target_q_value.view(-1,1)
-    # current = Variable(torch.FloatTensor(np.float32(current)))
-    # next = Variable(torch.FloatTensor(np.float32(next)), requires_grad=True)
-
-    #
-    # print('In loss function', \
-    #       'current_q_value shape', current_q_value.shape, \
-    #       'action shape', action.shape, \
-    #       'target_q_val shape', target_q_value.shape, \
-    #       'reward', reward.shape, \
-    #       'done', done.shape, '\n')
-
 
     # loss = torch.mean((target_q_val - current_q_value)**2))
     loss = F.smooth_l1_loss(current_q_value, target_q_value)
