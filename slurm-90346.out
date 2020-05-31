@@ -1,0 +1,15 @@
+Running on local02
+gpu
+Namespace(N=1, batch_size=16, capacity=1000000, epsilon_decay=30000, epsilon_final=0.01, epsilon_start=1.0, gamma=0.99, lr=3e-05, num_frames=1000000, number_of_updates=10, optimizer='Adam', render=0, save_freq_frame=100000, save_model_path='../results/DQN/model_default_lr3e_5_diffKernel.pth', save_result_path='../results/DQN/results_default_lr3e_5_diffKernel.npy', seed=1, target_update_freq=10000)
+Using cuda:  True
+Preparing replay buffer with len --  10000 Frame: 10000 Total time so far: 18.496233701705933
+Frame: 20000 Loss: 0.0028163916 Total Rewards: -19.0 Average Rewards over all frames: -20.19047619047619 Last-10 average reward: -20.1 Best mean reward of last-10: -20.1 Time: 0.025032520294189453 Total time so far: 4476.152135372162
+Frame: 30000 Loss: 0.0021003198 Total Rewards: -19.0 Average Rewards over all frames: -20.066666666666666 Last-10 average reward: -19.7 Best mean reward of last-10: -19.7 Time: 0.028932571411132812 Total time so far: 8947.483212947845
+Frame: 40000 Loss: 0.0022545913 Total Rewards: -18.0 Average Rewards over all frames: -19.64864864864865 Last-10 average reward: -18.4 Best mean reward of last-10: -18.4 Time: 0.03543257713317871 Total time so far: 13420.999498128891
+Frame: 50000 Loss: 0.0024466007 Total Rewards: -16.0 Average Rewards over all frames: -19.27906976744186 Last-10 average reward: -17.3 Best mean reward of last-10: -17.3 Time: 0.03642845153808594 Total time so far: 17899.538311719894
+Frame: 60000 Loss: 0.0026883453 Total Rewards: -15.0 Average Rewards over all frames: -19.1 Last-10 average reward: -17.4 Best mean reward of last-10: -17.3 Time: 0.032329559326171875 Total time so far: 22384.008234262466
+Frame: 70000 Loss: 0.0029026817 Total Rewards: -19.0 Average Rewards over all frames: -18.912280701754387 Last-10 average reward: -17.7 Best mean reward of last-10: -17.3 Time: 0.03231406211853027 Total time so far: 26869.401729106903
+Frame: 80000 Loss: 0.003121371 Total Rewards: -19.0 Average Rewards over all frames: -18.714285714285715 Last-10 average reward: -17.6 Best mean reward of last-10: -17.3 Time: 0.027971267700195312 Total time so far: 31354.497594356537
+Frame: 90000 Loss: 0.0033981302 Total Rewards: -15.0 Average Rewards over all frames: -18.36764705882353 Last-10 average reward: -15.7 Best mean reward of last-10: -15.7 Time: 0.03481268882751465 Total time so far: 35851.109186410904
+Frame: 100000 Loss: 0.003650595 Total Rewards: -16.0 Average Rewards over all frames: -18.210526315789473 Last-10 average reward: -16.3 Best mean reward of last-10: -15.7 Time: 0.03682732582092285 Total time so far: 40353.14905190468
+Frame: 110000 Loss: 0.0038712712 Total Rewards: -14.0 Average Rewards over all frames: -18.0 Last-10 average reward: -16.2 Best mean reward of last-10: -15.7 Time: 0.035700082778930664 Total time so far: 44844.14586830139
