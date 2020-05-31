@@ -84,29 +84,29 @@ def compute_td_loss(model_Q, model_target_Q, batch_size, gamma, replay_buffer, N
     # Compute current Q value, q_func takes only state and output value for every state-action pair
     # We choose Q based on action taken.
     q_value = model_Q.forward(state)
-    current_q_value = q_value.gather(1,action.view(-1,1))
+    current_q_value = q_value.gather(1, action.view(-1,1))
     # Compute next Q value based on which action gives max Q values
     # Detach variable from the current graph since we don't want gradients for next Q to propagated
     with torch.no_grad():
         next_q_value = model_target_Q.forward(next_state).detach()
         target_q_value = reward + (1-done) * gamma * torch.max(next_q_value.detach(),dim=1)[0]
-
+        target_q_value = target_q_value.view(-1,1)
     # current = Variable(torch.FloatTensor(np.float32(current)))
     # next = Variable(torch.FloatTensor(np.float32(next)), requires_grad=True)
-    target_q_val = target_q_val.view(-1,1)
+
 
 
     print('In loss function', \
-          'current_q_value shape', state.shape, \
+          'current_q_value shape', current_q_value.shape, \
           'action shape', action.shape, \
-          'target_q_val shape', next_state.shape, \
+          'target_q_val shape', target_q_value.shape, \
           'reward', reward.shape, \
           'done', done.shape, '\n')
 
 
 
     # loss = torch.mean((target_q_val - current_q_value)**2))
-    loss = F.smooth_l1_loss(current_q_value, target_q_val)
+    loss = F.smooth_l1_loss(current_q_value, target_q_value)
     ######## YOUR CODE HERE! ########
     return loss
 
