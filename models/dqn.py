@@ -68,7 +68,7 @@ class QLearner(nn.Module):
             action = random.randrange(self.env.action_space.n)
         return action
 
-def compute_td_loss(model_Q, model_target_Q,, batch_size, gamma, replay_buffer, N):
+def compute_td_loss(model_Q, model_target_Q, batch_size, gamma, replay_buffer, N):
 
     state, action, reward, next_state, done = replay_buffer.sample(batch_size)
 
