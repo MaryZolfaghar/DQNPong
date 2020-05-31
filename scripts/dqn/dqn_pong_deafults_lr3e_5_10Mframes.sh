@@ -18,7 +18,7 @@ echo "gpu" $gpu
 
 python3 train.py \
 --lr 0.00003 \
---num_frames = 10000000 \
---save_interim_path = ../results/DQN/interim/ \
+--num_frames 10000000 \
+--save_interim_path ../results/DQN/interim/ \
 --save_result_path ../results/DQN/results_lr3e_5_10Mframes.npy \
 --save_model_path ../results/DQN/model_lr3e_5_10Mframes.pth
