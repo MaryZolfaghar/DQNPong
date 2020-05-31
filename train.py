@@ -117,11 +117,11 @@ def main(args):
 
         next_state, reward, done, _ = env.step(action)
         replay_buffer.push(state, action, reward, next_state, done)
-        print('Frame,' frame_idx, \
+        print('Frame', frame_idx, \
               'state shape', state.shape, \
-              'action shape', action.shape \
-              'next_state shape', next_state.shape \
-              'reward shape', reward.shape \
+              'action shape', action.shape, \
+              'next_state shape', next_state.shape, \
+              'reward shape', reward.shape, \
               'done shape', done.shape, '\n')
 
         state = next_state
