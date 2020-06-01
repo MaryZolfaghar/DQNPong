@@ -176,9 +176,9 @@ def main(args):
             results = [losses, all_rewards, time_history]
 
             torch.save(model_Q.state_dict(), args.save_interim_path + \
-                      'model_lr%s_frame_%s.pth' %(lr,frame_idx))
+                      'model_lr%s_frame_%s.pth' %(args.lr,frame_idx))
             np.save(args.save_interim_path + \
-                   'results_lr%s_frame_%s.npy' %(lr,frame_idx), results)
+                   'results_lr%s_frame_%s.npy' %(args.lr,frame_idx), results)
 
             # model_new = NeuralNet()
             # model_new.load_state_dict(torch.load('weights_only.pth'))

@@ -124,17 +124,6 @@ class ReplayBuffer(object):
 
         batch = random.sample(self.buffer, batch_size)
         state,action,reward,next_state,done = zip(*batch)
-        # state  = []
-        # action = []
-        # reward = []
-        # next_state = []
-        # done = []
-        # for sample in batch:
-        #     state.append(sample[0])
-        #     action.append(sample[1])
-        #     reward.append(sample[2])
-        #     next_state.append(sample[3])
-        #     done.append(sample[4])
 
         # If you are not familiar with the "deque" python library, please google it.
         ######## YOUR CODE HERE! ########
