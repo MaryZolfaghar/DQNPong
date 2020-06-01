@@ -175,6 +175,12 @@ def main(args):
             results = [losses, all_rewards, time_history]
             torch.save(model_Q.state_dict(), args.save_model_path)
             np.save(args.save_result_path, results)
+        if frame_idx == 10000:
+            results = [losses, all_rewards, time_history]
+            torch.save(model_Q.state_dict(), args.save_interim_path + \
+                      'model_lr%s_frame_%s_framestack_%s.pth' %(args.lr,frame_idx, args.frame_stack))
+            np.save(args.save_interim_path + \
+                   'results_lr%s_frame_%s_framestack_%s.npy' %(args.lr,frame_idx, args.frame_stack), results)
 
         if frame_idx % 500000 == 0:
             results = [losses, all_rewards, time_history]
