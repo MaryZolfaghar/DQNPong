@@ -25,6 +25,9 @@ parser = argparse.ArgumentParser()
 # CUDA
 parser.add_argument('--seed', type=int, default=1,
                     help='Random seed')
+# Wrapper
+parser.add_argument('--frame_stack', action='store_true',
+                    help='Num of frames to stack, default is using prev four frames')
 # QLearner
 parser.add_argument('--batch_size', type=int, default=16,
                     help='')
@@ -76,7 +79,7 @@ def main(args):
     # Environment
     env_id = "PongNoFrameskip-v4"
     env = make_atari(env_id)
-    env = wrap_deepmind(env)
+    env = wrap_deepmind(env, args.frame_stack)
     env = wrap_pytorch(env)
 
     # Random seed
@@ -173,19 +176,12 @@ def main(args):
             torch.save(model_Q.state_dict(), args.save_model_path)
             np.save(args.save_result_path, results)
 
-        if frame_idx == 10000:
-            results = [losses, all_rewards, time_history]
-            torch.save(model_Q.state_dict(), args.save_interim_path + \
-                      'model_lr%s_frame_%s.pth' %(args.lr,frame_idx))
-            np.save(args.save_interim_path + \
-                   'results_lr%s_frame_%s.npy' %(args.lr,frame_idx), results)
-
         if frame_idx % 500000 == 0:
             results = [losses, all_rewards, time_history]
             torch.save(model_Q.state_dict(), args.save_interim_path + \
-                      'model_lr%s_frame_%s.pth' %(args.lr,frame_idx))
+                      'model_lr%s_frame_%s_framestack_%s.pth' %(args.lr,frame_idx, args.frame_stack))
             np.save(args.save_interim_path + \
-                   'results_lr%s_frame_%s.npy' %(args.lr,frame_idx), results)
+                   'results_lr%s_frame_%s_framestack_%s.npy' %(args.lr,frame_idx, args.frame_stack), results)
 
             # model_new = NeuralNet()
             # model_new.load_state_dict(torch.load('weights_only.pth'))
