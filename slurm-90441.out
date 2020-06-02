@@ -1,0 +1,210 @@
+activating environment RLPngDQN
+Could not find conda environment: RLPngDQN
+You can list all discoverable environments with `conda info --envs`.
+
+SLURM_NODELIST=local01
+SLURM_JOB_NAME=start_jupyter.sh
+XDG_SESSION_ID=38264
+SLURMD_NODENAME=local01
+SLURM_TOPOLOGY_ADDR=local01
+HOSTNAME=local01
+SLURM_PRIO_PROCESS=0
+SLURM_NODE_ALIASES=(null)
+TERM=xterm-256color
+SHELL=/bin/bash
+SLURM_JOB_QOS=this qos allows for short jobs that cannot be preempted
+TMPDIR=/tmp
+SLURM_TOPOLOGY_ADDR_PATTERN=node
+SSH_CLIENT=24.238.13.130 62221 22
+CONDA_SHLVL=0
+SSH_TTY=/dev/pts/8
+NO_PROXY=localhost,127.0.0.1,192.168.1.0/24,.e-cortex.com
+SLURM_NNODES=1
+http_proxy=http://192.168.1.41:3128/
+USER=mazlfghr
+LD_LIBRARY_PATH=/usr/local/cuda/lib64
+CONDA_EXE=/usr/local/anaconda3/bin/conda
+SLURM_JOBID=90441
+SSH_AUTH_SOCK=/tmp/ssh-R0zCrbNusa/agent.32577
+TMOUT=1200
+SLURM_TASKS_PER_NODE=1
+MAIL=/var/mail/mazlfghr
+PATH=/usr/local/anaconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+SLURM_WORKING_CLUSTER=cluster:ashitaka:6817:8704:109
+SLURM_JOB_ID=90441
+SLURM_CPUS_PER_TASK=4
+SLURM_JOB_USER=mazlfghr
+PWD=/home/mazlfghr/projects/ml_project_ECS271_S20/pong/DQNPong
+CUDA_VISIBLE_DEVICES=1
+LANG=en_US.UTF-8
+SLURM_JOB_UID=1021
+SLURM_NODEID=0
+SLURM_SUBMIT_DIR=/home/mazlfghr/projects/ml_project_ECS271_S20/pong/DQNPong
+SLURM_TASK_PID=32666
+SLURM_CPUS_ON_NODE=4
+HTTPS_PROXY=http://192.168.1.41:3128/
+https_proxy=http://192.168.1.41:3128/
+SLURM_PROCID=0
+ENVIRONMENT=BATCH
+SLURM_JOB_NODELIST=local01
+SHLVL=3
+HOME=/home/mazlfghr
+SLURM_LOCALID=0
+SLURM_JOB_GID=1021
+SLURM_JOB_CPUS_PER_NODE=4
+SLURM_CLUSTER_NAME=cluster
+no_proxy=localhost,127.0.0.1,192.168.1.0/24,.e-cortex.com
+SLURM_GTIDS=0
+SLURM_SUBMIT_HOST=ashitaka
+HTTP_PROXY=http://192.168.1.41:3128/
+SLURM_JOB_PARTITION=local
+SLURM_JOB_GRES=1
+LOGNAME=mazlfghr
+GPU_DEVICE_ORDINAL=1
+SLURM_JOB_ACCOUNT=ecortex
+XDG_DATA_DIRS=/usr/local/share:/usr/share:/var/lib/snapd/desktop
+SSH_CONNECTION=24.238.13.130 62221 10.0.1.41 22
+SLURM_JOB_NUM_NODES=1
+XDG_RUNTIME_DIR=/run/user/1021
+SLURM_MEM_PER_NODE=24576
+_=/usr/bin/env
+SLURM_NODELIST=local01
+SLURM_JOB_NAME=start_jupyter.sh
+XDG_SESSION_ID=38264
+SLURMD_NODENAME=local01
+SLURM_TOPOLOGY_ADDR=local01
+HOSTNAME=local01
+SLURM_PRIO_PROCESS=0
+SLURM_NODE_ALIASES=(null)
+TERM=xterm-256color
+SHELL=/bin/bash
+SLURM_JOB_QOS=this qos allows for short jobs that cannot be preempted
+TMPDIR=/tmp
+SLURM_TOPOLOGY_ADDR_PATTERN=node
+SSH_CLIENT=24.238.13.130 62221 22
+CONDA_SHLVL=0
+SSH_TTY=/dev/pts/8
+NO_PROXY=localhost,127.0.0.1,192.168.1.0/24,.e-cortex.com
+SLURM_NNODES=1
+http_proxy=http://192.168.1.41:3128/
+USER=mazlfghr
+LD_LIBRARY_PATH=/usr/local/cuda/lib64
+CONDA_EXE=/usr/local/anaconda3/bin/conda
+SLURM_JOBID=90441
+SSH_AUTH_SOCK=/tmp/ssh-R0zCrbNusa/agent.32577
+TMOUT=1200
+SLURM_TASKS_PER_NODE=1
+MAIL=/var/mail/mazlfghr
+PATH=/usr/local/anaconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+SLURM_WORKING_CLUSTER=cluster:ashitaka:6817:8704:109
+SLURM_JOB_ID=90441
+SLURM_CPUS_PER_TASK=4
+SLURM_JOB_USER=mazlfghr
+PWD=/home/mazlfghr/projects/ml_project_ECS271_S20/pong/DQNPong
+CUDA_VISIBLE_DEVICES=1
+LANG=en_US.UTF-8
+SLURM_JOB_UID=1021
+SLURM_NODEID=0
+SLURM_SUBMIT_DIR=/home/mazlfghr/projects/ml_project_ECS271_S20/pong/DQNPong
+SLURM_TASK_PID=32666
+SLURM_CPUS_ON_NODE=4
+HTTPS_PROXY=http://192.168.1.41:3128/
+https_proxy=http://192.168.1.41:3128/
+SLURM_PROCID=0
+ENVIRONMENT=BATCH
+SLURM_JOB_NODELIST=local01
+SHLVL=3
+HOME=/home/mazlfghr
+SLURM_LOCALID=0
+SLURM_JOB_GID=1021
+SLURM_JOB_CPUS_PER_NODE=4
+SLURM_CLUSTER_NAME=cluster
+no_proxy=localhost,127.0.0.1,192.168.1.0/24,.e-cortex.com
+SLURM_GTIDS=0
+SLURM_SUBMIT_HOST=ashitaka
+HTTP_PROXY=http://192.168.1.41:3128/
+SLURM_JOB_PARTITION=local
+SLURM_JOB_GRES=1
+LOGNAME=mazlfghr
+GPU_DEVICE_ORDINAL=1
+SLURM_JOB_ACCOUNT=ecortex
+XDG_DATA_DIRS=/usr/local/share:/usr/share:/var/lib/snapd/desktop
+SSH_CONNECTION=24.238.13.130 62221 10.0.1.41 22
+SLURM_JOB_NUM_NODES=1
+SLURM_MEM_PER_NODE=24576
+_=/usr/bin/env
+[W 07:52:21.931 NotebookApp] All authentication is disabled.  Anyone who can connect to this server will be able to run code.
+[I 07:52:21.950 NotebookApp] Serving notebooks from local directory: /home/mazlfghr/projects/ml_project_ECS271_S20/pong/DQNPong
+[I 07:52:21.950 NotebookApp] The Jupyter Notebook is running at:
+[I 07:52:21.950 NotebookApp] http://localhost:8996/
+[I 07:52:21.951 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[W 08:01:30.743 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:01:34.080 NotebookApp] Kernel started: ee090c4b-6e63-4057-b6ec-9d40a37858e9
+[I 08:09:34.476 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:09:34.477 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:11:31.453 NotebookApp] Kernel interrupted: ee090c4b-6e63-4057-b6ec-9d40a37858e9
+[I 08:11:34.362 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:11:34.362 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:13:34.488 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:13:34.489 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:15:34.481 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:15:34.482 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:17:34.464 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:17:34.465 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:18:48.174 NotebookApp] Kernel interrupted: ee090c4b-6e63-4057-b6ec-9d40a37858e9
+[I 08:19:06.632 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:19:06.633 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:19:25.781 NotebookApp] Kernel interrupted: ee090c4b-6e63-4057-b6ec-9d40a37858e9
+[I 08:19:34.344 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:19:34.345 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:21:34.334 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:21:34.335 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:23:34.395 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:23:34.396 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:25:34.372 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:25:34.373 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:29:32.255 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:29:32.255 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:29:53.245 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:29:53.246 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:31:34.375 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:31:34.376 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:33:19.132 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:33:19.134 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:33:21.921 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:33:21.922 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:33:34.255 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:33:34.256 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:34:09.656 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:34:09.657 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:35:34.365 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:35:34.366 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:35:42.861 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:35:42.862 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:37:34.379 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:37:34.380 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:38:19.555 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:38:19.556 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:38:30.553 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:38:30.554 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:39:34.365 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:39:34.365 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:40:09.579 NotebookApp] Kernel interrupted: ee090c4b-6e63-4057-b6ec-9d40a37858e9
+[I 08:41:31.422 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:41:31.423 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:42:18.484 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:42:18.485 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:43:34.311 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:43:34.311 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:43:37.387 NotebookApp] Kernel interrupted: ee090c4b-6e63-4057-b6ec-9d40a37858e9
+[I 08:44:05.598 NotebookApp] Kernel interrupted: ee090c4b-6e63-4057-b6ec-9d40a37858e9
+[I 08:45:34.313 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:45:34.314 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:46:12.561 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:46:12.563 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:47:41.361 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:47:41.362 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 08:49:34.361 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 08:49:34.362 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
+[I 09:05:34.297 NotebookApp] Saving file at /tinkering_dqn_backup.ipynb
+[W 09:05:34.298 NotebookApp] Notebook tinkering_dqn_backup.ipynb is not trusted
