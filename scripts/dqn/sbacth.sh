@@ -28,4 +28,4 @@
 # sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_4prevframes.sh
 sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_scheduler.sh # job 90443 with warning - job 90447 without warning
 sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_scheduler2.sh # job 90446
-sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_scheduler3.sh # job 90446
+sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_scheduler3.sh # job 

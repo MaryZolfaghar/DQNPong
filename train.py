@@ -208,20 +208,20 @@ def main(args):
         if frame_idx == 10000:
             results = [losses, all_rewards, time_history]
             torch.save(model_Q.state_dict(), args.save_interim_path + \
-                      'model_lr%s_frame_%s_framestack_%s_scheduler_%s_RPlateau.pth'\
+                      'model_lr%s_frame_%s_framestack_%s_scheduler_%s_RPlateau_default.pth'\
                        %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler))
             np.save(args.save_interim_path + \
-                   'results_lr%s_frame_%s_framestack_%s_scheduler_%s_RPlateau.npy' \
+                   'results_lr%s_frame_%s_framestack_%s_scheduler_%s_RPlateau_default.npy' \
                     %(args.lr, frame_idx, args.frame_stack, args.use_optim_scheduler), \
                     results)
 
         if frame_idx % 500000 == 0:
             results = [losses, all_rewards, time_history]
             torch.save(model_Q.state_dict(), args.save_interim_path + \
-                      'model_lr%s_frame_%s_framestack_%s_scheduler_%s_RPlateau.pth' \
+                      'model_lr%s_frame_%s_framestack_%s_scheduler_%s_RPlateau_default.pth' \
                       %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler))
             np.save(args.save_interim_path + \
-                   'results_lr%s_frame_%s_framestack_%s_scheduler_%s_RPlateau.npy' \
+                   'results_lr%s_frame_%s_framestack_%s_scheduler_%s_RPlateau_default.npy' \
                    %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler), \
                     results)
 
