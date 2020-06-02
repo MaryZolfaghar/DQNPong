@@ -50,6 +50,14 @@ class QLearner(nn.Module):
             nn.ReLU(),
             nn.Linear(512, self.num_actions)
         )
+    #     self.emb = nn.Sequential(
+    #         nn.Linear(self.feature_size(), 512),
+    #         nn.ReLU()
+    #     )
+    # def embeddings(self, x):
+    #     x = self.features(x)
+    #     x = self.emb(x)
+    #     return x
 
     def forward(self, x):
         x = self.features(x)

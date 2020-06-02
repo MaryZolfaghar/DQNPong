@@ -18,8 +18,11 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.autograd as autograd
 import torch.nn.functional as F
-USE_CUDA = torch.cuda.is_available()
+from torch.optim.lr_scheduler import StepLR, ReduceLROnPlateau
 from models.dqn import QLearner, compute_td_loss, ReplayBuffer
+
+USE_CUDA = torch.cuda.is_available()
+
 
 parser = argparse.ArgumentParser()
 # CUDA
@@ -28,6 +31,10 @@ parser.add_argument('--seed', type=int, default=1,
 # Wrapper
 parser.add_argument('--frame_stack', action='store_true',
                     help='Num of frames to stack, default is using prev four frames')
+
+
+
+
 # QLearner
 parser.add_argument('--batch_size', type=int, default=16,
                     help='')
@@ -57,6 +64,12 @@ parser.add_argument('--optimizer', choices=['Adam','RMSprop'],
                     help='Optimizer to use for training')
 parser.add_argument('--lr', type=float, default=0.00001,
                     help='Learning rate of optimizer (default from mjacar)')
+parser.add_argument('--use_optim_scheduler', action='store_true',
+                    help='Whether use scheduler for the optimizer or not')
+parser.add_argument('--initial_lr', type=float, default=0.0003,
+                    help='Initial Learning rate of optimizer')
+parser.add_argument('--step_size', type=int, default=50000,
+                    help='Size of step for the optimizer scheduler')
 # ReplayBuffer
 parser.add_argument('--capacity', type=int, default=1000000,
                     help='Number of states to store in the replay buffer')
@@ -95,7 +108,12 @@ def main(args):
     model_target_Q = QLearner(env, args, replay_buffer)
 
     if args.optimizer == 'Adam':
-        optimizer = optim.Adam(model_Q .parameters(), args.lr)
+        if args.use_optim_scheduler:
+            optimizer = optim.Adam(model_Q.parameters(), lr=args.initial_lr)
+            scheduler = StepLR(optimizer, step_size=args.step_size, gamma=args.gamma)
+        else:
+            optimizer = optim.Adam(model_Q .parameters(), args.lr)
+
     elif args.optimizer == 'RMSprop':
         optimizer = optim.RMSprop(model_Q.parameters(), args.lr)
 
@@ -107,6 +125,7 @@ def main(args):
     epsilon_by_frame = lambda frame_idx: args.epsilon_final + (args.epsilon_start - args.epsilon_final) * math.exp(-1. * frame_idx / args.epsilon_decay)
 
     losses = []
+    learning_rates = []
     all_rewards = []
     episode_reward = 0
     num_param_updates = 0
@@ -115,11 +134,20 @@ def main(args):
     best_mean_reward = -float('inf')
     best_mean_reward2 = -float('inf')
     time_history = [] # records time (in sec) of each episode
-
+    old_lr = args.initial_lr.copy()
     state = env.reset()
     start_time_frame = time.time()
     for frame_idx in range(1, args.num_frames + 1):
         start_time = time.time()
+
+        if args.use_optim_scheduler:
+            scheduler.step()
+            new_lr = scheduler.get_lr()
+            if new_lr != old_lr:
+                learning_rates.append(new_lr)
+                print('NewLearningRate: ', new_lr)
+            old_lr = new_lr
+
 
         epsilon = epsilon_by_frame(frame_idx)
         action = model_Q.act(state, epsilon)
@@ -145,6 +173,7 @@ def main(args):
                 loss.backward()
                 optimizer.step()
                 losses.append(loss.data.cpu().numpy())
+
                 num_param_updates += 1
             # Periodically update the target network by Q network to target Q network
             if num_param_updates % args.target_update_freq == 0:
@@ -178,16 +207,22 @@ def main(args):
         if frame_idx == 10000:
             results = [losses, all_rewards, time_history]
             torch.save(model_Q.state_dict(), args.save_interim_path + \
-                      'model_lr%s_frame_%s_framestack_%s.pth' %(args.lr,frame_idx, args.frame_stack))
+                      'model_lr%s_frame_%s_framestack_%s_scheduler_%s.pth'\
+                       %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler))
             np.save(args.save_interim_path + \
-                   'results_lr%s_frame_%s_framestack_%s.npy' %(args.lr,frame_idx, args.frame_stack), results)
+                   'results_lr%s_frame_%s_framestack_%s_scheduler_%s.npy' \
+                    %(args.lr, frame_idx, args.frame_stack, args.use_optim_scheduler), \
+                    results)
 
         if frame_idx % 500000 == 0:
             results = [losses, all_rewards, time_history]
             torch.save(model_Q.state_dict(), args.save_interim_path + \
-                      'model_lr%s_frame_%s_framestack_%s.pth' %(args.lr,frame_idx, args.frame_stack))
+                      'model_lr%s_frame_%s_framestack_%s_scheduler_%s.pth' \
+                      %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler))
             np.save(args.save_interim_path + \
-                   'results_lr%s_frame_%s_framestack_%s.npy' %(args.lr,frame_idx, args.frame_stack), results)
+                   'results_lr%s_frame_%s_framestack_%s_scheduler_%s.npy' \
+                   %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler), \
+                    results)
 
             # model_new = NeuralNet()
             # model_new.load_state_dict(torch.load('weights_only.pth'))
