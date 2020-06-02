@@ -140,15 +140,6 @@ def main(args):
     for frame_idx in range(1, args.num_frames + 1):
         start_time = time.time()
 
-        if args.use_optim_scheduler:
-            scheduler.step()
-            new_lr = scheduler.get_lr()
-            if new_lr != old_lr:
-                learning_rates.append(new_lr)
-                print('NewLearningRate: ', new_lr)
-            old_lr = new_lr
-
-
         epsilon = epsilon_by_frame(frame_idx)
         action = model_Q.act(state, epsilon)
 
@@ -178,6 +169,14 @@ def main(args):
             # Periodically update the target network by Q network to target Q network
             if num_param_updates % args.target_update_freq == 0:
                 model_target_Q.load_state_dict(model_Q.state_dict())
+
+            if args.use_optim_scheduler:
+                scheduler.step()
+                new_lr = scheduler.get_lr()
+                if new_lr != old_lr:
+                    learning_rates.append(new_lr)
+                    print('NewLearningRate: ', new_lr)
+                old_lr = new_lr
 
         if frame_idx % 10000 == 0 and len(replay_buffer) <= replay_initial:
             print("Preparing replay buffer with len -- ", len(replay_buffer),
