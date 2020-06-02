@@ -18,7 +18,7 @@ echo "gpu" $gpu
 
 python3 train.py \
 --number_of_updates 1 \
---batch_size 32\
+--batch_size 32 \
 --capacity 100000 \
 --lr 0.00001 \
 --num_frames 10000000 \
