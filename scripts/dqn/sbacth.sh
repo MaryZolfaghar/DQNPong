@@ -26,5 +26,5 @@
 # sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_diffKernel.sh
 # sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes.sh
 # sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_4prevframes.sh
-sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_scheduler.sh
-sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_scheduler2.sh
+sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_scheduler.sh # job 90443 with warning - job 90444 without warning
+sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_scheduler2.sh # job 90445
