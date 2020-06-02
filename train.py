@@ -173,7 +173,7 @@ def main(args):
 
             if args.use_optim_scheduler:
                 scheduler.step(mean_reward2)
-                new_lr = scheduler.get_last_lr()
+                new_lr = scheduler.get_lr()
                 if new_lr != old_lr:
                     learning_rates.append(new_lr)
                     print('NewLearningRate: ', new_lr)
