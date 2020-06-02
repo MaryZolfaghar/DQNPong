@@ -27,3 +27,4 @@
 # sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes.sh
 # sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_4prevframes.sh
 sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_scheduler.sh
+sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_scheduler2.sh

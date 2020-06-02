@@ -22,5 +22,5 @@ python3 train.py \
 --step_size 500000 \
 --num_frames 10000000 \
 --save_interim_path ../results/DQN/interim/ \
---save_result_path ../results/DQN/results_lr3e_5_10Mframes_scheduler.npy \
---save_model_path ../results/DQN/model_lr3e_5_10Mframes_scheduler.pth
+--save_result_path ../results/DQN/results_lr3e_5_10Mframes_scheduler2.npy \
+--save_model_path ../results/DQN/model_lr3e_5_10Mframes_scheduler2.pth
