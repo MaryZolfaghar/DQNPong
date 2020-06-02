@@ -134,7 +134,7 @@ def main(args):
     best_mean_reward = -float('inf')
     best_mean_reward2 = -float('inf')
     time_history = [] # records time (in sec) of each episode
-    old_lr = args.initial_lr.copy()
+    old_lr = args.initial_lr
     state = env.reset()
     start_time_frame = time.time()
     for frame_idx in range(1, args.num_frames + 1):
