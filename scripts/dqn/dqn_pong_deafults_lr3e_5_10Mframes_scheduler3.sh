@@ -18,7 +18,7 @@ echo "gpu" $gpu
 
 python3 train.py \
 --use_optim_scheduler \
---initial_lr 0.00003 \
+--initial_lr 0.0003 \
 --num_frames 10000000 \
 --save_interim_path ../results/DQN/interim/ \
 --save_result_path ../results/DQN/results_lr3e_5_10Mframes_scheduler3.npy \
