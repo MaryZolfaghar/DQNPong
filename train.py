@@ -111,7 +111,7 @@ def main(args):
         if args.use_optim_scheduler:
             optimizer = optim.Adam(model_Q.parameters(), lr=args.initial_lr)
             # scheduler = StepLR(optimizer, step_size=args.step_size, gamma=args.gamma)
-            scheduler = ReduceLROnPlateau(optimizer, mode='max', factor=0.1, patience=10, verbose=True)
+            scheduler = ReduceLROnPlateau(optimizer, mode='max', factor=0.1, patience=1000, verbose=True)
         else:
             optimizer = optim.Adam(model_Q .parameters(), args.lr)
 
