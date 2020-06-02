@@ -110,7 +110,8 @@ def main(args):
     if args.optimizer == 'Adam':
         if args.use_optim_scheduler:
             optimizer = optim.Adam(model_Q.parameters(), lr=args.initial_lr)
-            scheduler = StepLR(optimizer, step_size=args.step_size, gamma=args.gamma)
+            # scheduler = StepLR(optimizer, step_size=args.step_size, gamma=args.gamma)
+            scheduler = ReduceLROnPlateau(optimizer, mode='max', factor=0.1, patience=10, verbose=True)
         else:
             optimizer = optim.Adam(model_Q .parameters(), args.lr)
 
@@ -171,7 +172,7 @@ def main(args):
                 model_target_Q.load_state_dict(model_Q.state_dict())
 
             if args.use_optim_scheduler:
-                scheduler.step()
+                scheduler.step(mean_reward2)
                 new_lr = scheduler.get_last_lr()
                 if new_lr != old_lr:
                     learning_rates.append(new_lr)
@@ -206,20 +207,20 @@ def main(args):
         if frame_idx == 10000:
             results = [losses, all_rewards, time_history]
             torch.save(model_Q.state_dict(), args.save_interim_path + \
-                      'model_lr%s_frame_%s_framestack_%s_scheduler_%s.pth'\
+                      'model_lr%s_frame_%s_framestack_%s_scheduler_%s_RPlateau.pth'\
                        %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler))
             np.save(args.save_interim_path + \
-                   'results_lr%s_frame_%s_framestack_%s_scheduler_%s.npy' \
+                   'results_lr%s_frame_%s_framestack_%s_scheduler_%s_RPlateau.npy' \
                     %(args.lr, frame_idx, args.frame_stack, args.use_optim_scheduler), \
                     results)
 
         if frame_idx % 500000 == 0:
             results = [losses, all_rewards, time_history]
             torch.save(model_Q.state_dict(), args.save_interim_path + \
-                      'model_lr%s_frame_%s_framestack_%s_scheduler_%s.pth' \
+                      'model_lr%s_frame_%s_framestack_%s_scheduler_%s_RPlateau.pth' \
                       %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler))
             np.save(args.save_interim_path + \
-                   'results_lr%s_frame_%s_framestack_%s_scheduler_%s.npy' \
+                   'results_lr%s_frame_%s_framestack_%s_scheduler_%s_RPlateau.npy' \
                    %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler), \
                     results)
 
