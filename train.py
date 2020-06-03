@@ -110,8 +110,8 @@ def main(args):
     if args.optimizer == 'Adam':
         if args.use_optim_scheduler:
             optimizer = optim.Adam(model_Q.parameters(), lr=args.initial_lr)
-            # scheduler = StepLR(optimizer, step_size=args.step_size, gamma=args.gamma)
-            scheduler = ReduceLROnPlateau(optimizer, mode='max', factor=0.1, patience=1000, verbose=True)
+            scheduler = StepLR(optimizer, step_size=args.step_size, gamma=args.gamma)
+            # scheduler = ReduceLROnPlateau(optimizer, mode='max', factor=0.1, patience=1000, verbose=True)
         else:
             optimizer = optim.Adam(model_Q .parameters(), args.lr)
 
@@ -178,9 +178,10 @@ def main(args):
                 model_target_Q.load_state_dict(model_Q.state_dict())
 
             if args.use_optim_scheduler:
-                scheduler.step(mean_reward2)
-                # new_lr = scheduler.get_last_lr()
-                new_lr = optimizer.param_groups[0]['lr']
+                # scheduler.step(mean_reward2)
+                scheduler.step()
+                new_lr = scheduler.get_last_lr()
+                # new_lr = optimizer.param_groups[0]['lr']
                 if new_lr != old_lr:
                     learning_rates.append(new_lr)
                     print('NewLearningRate: ', new_lr)
