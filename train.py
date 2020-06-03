@@ -74,14 +74,18 @@ parser.add_argument('--step_size', type=int, default=50000,
 parser.add_argument('--capacity', type=int, default=1000000,
                     help='Number of states to store in the replay buffer')
 # Saving Results
+parser.add_argument('--save_freq_frame', type=int, default=100000,
+                    help='Save model and results every save_freq_frame times')
 parser.add_argument('--save_result_path', default='../results/DQN/results.npy',
                     help='Path to output data file with score history')
 parser.add_argument('--save_model_path', default='../results/DQN/weights_only.pth',
                     help='Path to output data file for saving the trainned model')
 parser.add_argument('--save_interim_path', default='../results/DQN/interim/',
                     help='Path to interim output data file with score history')
-parser.add_argument('--save_freq_frame', type=int, default=100000,
-                    help='Save model and results every save_freq_frame times')
+parser.add_argument('--interim_fn', default='interim_data',
+                    help='Filename to interim output data file')
+
+
 
 def main(args):
     # CUDA
@@ -211,26 +215,26 @@ def main(args):
                   if mean_reward > best_18_reward:
                       best_18_reward = mean_reward
                       torch.save(model_Q.state_dict(), args.save_interim_path + \
-                                'model_best_18_lr%s_frame_%s_framestack_%s_scheduler_%s.pth'\
-                                 %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler))
+                                'fmodel_best_18_lr%s_frame_%s_framestack_%s_scheduler_%s_%s.pth'\
+                                 %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler, args.interim_fn))
             if mean_reward >= 19.0:
                 if mean_reward > best_19_reward:
                     best_19_reward = mean_reward
                     torch.save(model_Q.state_dict(), args.save_interim_path + \
-                              'model_best_19_lr%s_frame_%s_framestack_%s_scheduler_%s.pth'\
-                               %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler))
+                              'fmodel_best_19_lr%s_frame_%s_framestack_%s_scheduler_%s_%s.pth'\
+                               %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler, args.interim_fn))
             if mean_reward >= 20.0:
                 if mean_reward > best_20_reward:
                     best_20_reward = mean_reward
                     torch.save(model_Q.state_dict(), args.save_interim_path + \
-                              'model_best_20_lr%s_frame_%s_framestack_%s_scheduler_%s.pth'\
-                               %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler))
+                              'fmodel_best_20_lr%s_frame_%s_framestack_%s_scheduler_%s_%s.pth'\
+                               %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler, args.interim_fn))
             if mean_reward >= 21.0:
                 if mean_reward > best_21_reward:
                     best_21_reward = mean_reward
                     torch.save(model_Q.state_dict(), args.save_interim_path + \
-                              'model_best_21_lr%s_frame_%s_framestack_%s_scheduler_%s.pth'\
-                               %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler))
+                              'fmodel_best_21_lr%s_frame_%s_framestack_%s_scheduler_%s_%s.pth'\
+                               %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler, args.interim_fn))
 
 
         if frame_idx % args.save_freq_frame == 0:
@@ -240,21 +244,21 @@ def main(args):
         if frame_idx == 10000:
             results = [losses, all_rewards, time_history]
             torch.save(model_Q.state_dict(), args.save_interim_path + \
-                      'model_lr%s_frame_%s_framestack_%s_scheduler_%s_v2.pth'\
-                       %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler))
+                      'fmodel_lr%s_frame_%s_framestack_%s_scheduler_%s_%s.pth'\
+                       %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler, args.interim_fn))
             np.save(args.save_interim_path + \
-                   'results_lr%s_frame_%s_framestack_%s_scheduler_%s.npy' \
-                    %(args.lr, frame_idx, args.frame_stack, args.use_optim_scheduler), \
+                   'fresults_lr%s_frame_%s_framestack_%s_scheduler_%s_%s.npy' \
+                    %(args.lr, frame_idx, args.frame_stack, args.use_optim_scheduler, args.interim_fn), \
                     results)
 
         if frame_idx % 500000 == 0:
             results = [losses, all_rewards, time_history]
             torch.save(model_Q.state_dict(), args.save_interim_path + \
-                      'model_lr%s_frame_%s_framestack_%s_scheduler_%s_v2.pth' \
-                      %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler))
+                      'fmodel_lr%s_frame_%s_framestack_%s_scheduler_%s_%s.pth' \
+                      %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler, args.interim_fn))
             np.save(args.save_interim_path + \
-                   'results_lr%s_frame_%s_framestack_%s_scheduler_%s.npy' \
-                   %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler), \
+                   'fresults_lr%s_frame_%s_framestack_%s_scheduler_%s_%s.npy' \
+                   %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler, args.interim_fn), \
                     results)
 
 if __name__ == '__main__':

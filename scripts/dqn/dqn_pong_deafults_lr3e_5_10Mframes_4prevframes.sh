@@ -21,5 +21,6 @@ python3 train.py \
 --lr 0.00003 \
 --num_frames 10000000 \
 --save_interim_path ../results/DQN/interim/ \
+--interim_fn 4prevframes_version2 \
 --save_result_path ../results/DQN/results_lr3e_5_10Mframes_4prevframes_version2.npy \
 --save_model_path ../results/DQN/model_lr3e_5_10Mframes_4prevframes_version2.pth

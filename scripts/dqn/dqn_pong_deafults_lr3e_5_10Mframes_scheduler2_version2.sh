@@ -17,11 +17,11 @@ gpus=$(echo $CUDA_VISIBLE_DEVICES | tr "," "\n")
 echo "gpu" $gpu
 
 python3 train.py \
---frame_stack \
---lr 0.00003 \
---optimizer RMSprop \
+--use_optim_scheduler \
+--initial_lr 0.00003 \
+--step_size 500000 \
 --num_frames 10000000 \
 --save_interim_path ../results/DQN/interim/ \
---interim_fn 4prevframes_RMSopt \
---save_result_path ../results/DQN/results_lr3e_5_10Mframes_4prevframes_RMSopt.npy \
---save_model_path ../results/DQN/model_lr3e_5_10Mframes_4prevframes_RMSopt.pth
+--interim_fn scheduler2_version2 \
+--save_result_path ../results/DQN/results_lr3e_5_10Mframes_scheduler2_version2.npy \
+--save_model_path ../results/DQN/model_lr3e_5_10Mframes_scheduler2_version2.pth
