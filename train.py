@@ -206,25 +206,25 @@ def main(args):
                   "Best mean reward of last-100:", best_mean_reward2,
                   "Time:", time_history[-1],
                   "Total time so far:", (time.time() - start_time_frame))
-              if mean_reward >=18:
+              if mean_reward >= 18.0:
                   if mean_reward > best_18_reward:
                       best_18_reward = mean_reward
                       torch.save(model_Q.state_dict(), args.save_interim_path + \
                                 'model_best_18_lr%s_frame_%s_framestack_%s_scheduler_%s.pth'\
                                  %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler))
-              if mean_reward >=19:
+              if mean_reward >= 19.0:
                   if mean_reward > best_19_reward:
                       best_19_reward = mean_reward
                       torch.save(model_Q.state_dict(), args.save_interim_path + \
                                 'model_best_19_lr%s_frame_%s_framestack_%s_scheduler_%s.pth'\
                                  %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler))
-             if mean_reward >=20 :
+             if mean_reward >= 20.0:
                  if mean_reward > best_20_reward:
                      best_20_reward = mean_reward
                      torch.save(model_Q.state_dict(), args.save_interim_path + \
                                'model_best_20_lr%s_frame_%s_framestack_%s_scheduler_%s.pth'\
                                 %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler))
-             if mean_reward >=21 :
+             if mean_reward >= 21.0:
                  if mean_reward > best_21_reward:
                      best_21_reward = mean_reward
                      torch.save(model_Q.state_dict(), args.save_interim_path + \
