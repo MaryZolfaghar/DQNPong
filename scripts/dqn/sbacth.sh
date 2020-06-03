@@ -25,12 +25,13 @@
 # sbatch scripts/dqn/dqn_pong_deafults_lr3e_6.sh # Last-10:  Best:
 # sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_diffKernel.sh
 # sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes.sh
-sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_4prevframes.sh
+sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_4prevframes.sh # slurm-90566.out
 sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_scheduler.sh # job 90443 with warning - job 90447 without warning
 sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_scheduler2.sh # job 90446
 sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_scheduler3.sh # job
 sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_deafultSetting.sh
-sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_4prevframes_scheduler2.sh # job 90446
+sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_4prevframes_scheduler2.sh #  slurm-90566.out
+sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_4prevframes_RMSopt.sh
 
 
 #best one so far : cat slurm-90398.out
