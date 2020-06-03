@@ -205,7 +205,7 @@ def main(args):
                   "Last-100 average reward:", mean_reward2,
                   "Best mean reward of last-100:", best_mean_reward2,
                   "Time:", time_history[-1],
-                  "Total time so far:", (time.time() - start_time_frame))      
+                  "Total time so far:", (time.time() - start_time_frame))
             if mean_reward >= 18.0:
                   if mean_reward > best_18_reward:
                       best_18_reward = mean_reward
@@ -239,7 +239,7 @@ def main(args):
         if frame_idx == 10000:
             results = [losses, all_rewards, time_history]
             torch.save(model_Q.state_dict(), args.save_interim_path + \
-                      'model_lr%s_frame_%s_framestack_%s_scheduler_%s.pth'\
+                      'model_lr%s_frame_%s_framestack_%s_scheduler_%s_v2.pth'\
                        %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler))
             np.save(args.save_interim_path + \
                    'results_lr%s_frame_%s_framestack_%s_scheduler_%s.npy' \
@@ -249,7 +249,7 @@ def main(args):
         if frame_idx % 500000 == 0:
             results = [losses, all_rewards, time_history]
             torch.save(model_Q.state_dict(), args.save_interim_path + \
-                      'model_lr%s_frame_%s_framestack_%s_scheduler_%s.pth' \
+                      'model_lr%s_frame_%s_framestack_%s_scheduler_%s_v2.pth' \
                       %(args.lr,frame_idx, args.frame_stack, args.use_optim_scheduler))
             np.save(args.save_interim_path + \
                    'results_lr%s_frame_%s_framestack_%s_scheduler_%s.npy' \
