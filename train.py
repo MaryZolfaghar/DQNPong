@@ -196,7 +196,6 @@ def main(args):
             mean_reward2 = np.mean(all_rewards[-100:])
             best_mean_reward = max(best_mean_reward, mean_reward)
             best_mean_reward2 = max(best_mean_reward2, mean_reward2)
-            if mean_reward >= 18.0:
             print("Frame:", frame_idx,
                   "Loss:", np.mean(losses),
                   "Total Rewards:", all_rewards[-1],
@@ -206,7 +205,7 @@ def main(args):
                   "Last-100 average reward:", mean_reward2,
                   "Best mean reward of last-100:", best_mean_reward2,
                   "Time:", time_history[-1],
-                  "Total time so far:", (time.time() - start_time_frame))
+                  "Total time so far:", (time.time() - start_time_frame))      
             if mean_reward >= 18.0:
                   if mean_reward > best_18_reward:
                       best_18_reward = mean_reward
