@@ -17,7 +17,7 @@ from models.dqn import QLearner, compute_td_loss, ReplayBuffer
 
 USE_CUDA = torch.cuda.is_available()
 
-arser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser()
 
 parser.add_argument('--embedding_type', choices=['fc_features','out','hidd_features'],
                     default='fc_features',
