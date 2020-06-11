@@ -4,21 +4,19 @@
 import argparse
 import time
 import numpy as np
-import torch.nn as nn
-import torch.optim as optim
-
-from Wrapper.layers import *
-from Wrapper.wrappers import make_atari, wrap_deepmind, wrap_pytorch
 import math, random
-import gym
-import numpy as np
 import matplotlib.pyplot as plt
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
 import torch.autograd as autograd
 import torch.nn.functional as F
 from torch.optim.lr_scheduler import StepLR, ReduceLROnPlateau
+
+import gym
+from Wrapper.layers import *
+from Wrapper.wrappers import make_atari, wrap_deepmind, wrap_pytorch
 from models.dqn import QLearner, compute_td_loss, ReplayBuffer
 
 USE_CUDA = torch.cuda.is_available()

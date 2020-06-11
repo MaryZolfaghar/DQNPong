@@ -7,6 +7,16 @@ from sklearn.decomposition import PCA, KernelPCA
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 
+import argparse
+import time
+import numpy as np
+import torch
+import torch.nn as nn
+
+from models.dqn import QLearner, compute_td_loss, ReplayBuffer
+
+USE_CUDA = torch.cuda.is_available()
+
 arser = argparse.ArgumentParser()
 
 parser.add_argument('--embedding_type', choices=['fc_features','out','hidd_features'],
@@ -41,6 +51,18 @@ def plot_emb_scatter(embedding, labels, title, save_fn):
         labelleft=False)
     plt.ticklabel_format(style='plain',useOffset=False)
     plt.savefig(save_fn, bbox_inches = 'tight', pad_inches = 0)
+
+
+#---------------------------------------------------------------------------------------
+# load best pre-trainned model
+#---------------------------------------------------------------------------------------
+model_result_path =  '../results/DQN/fmodel_best_19_lr1e-05_frame_1430000_framestack_False_scheduler_True_scheduler2_version2.pth'
+replay_initial = 10000 #50000
+replay_buffer = ReplayBuffer(args.capacity)
+
+model_new = QLearner(env, args, replay_buffer)
+model_new.load_state_dict(torch.load(model_result_path))
+model_new = model_new.cuda()
 
 #---------------------------------------------------------------------------------------
 # load data that randomely sampled from replay-buffer using best pre-trainned model
