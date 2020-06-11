@@ -13,7 +13,11 @@ import numpy as np
 import torch
 import torch.nn as nn
 
+import gym
+from Wrapper.layers import *
+from Wrapper.wrappers import make_atari, wrap_deepmind, wrap_pytorch
 from models.dqn import QLearner, compute_td_loss, ReplayBuffer
+
 
 USE_CUDA = torch.cuda.is_available()
 
@@ -62,6 +66,11 @@ model_result_path =  '../results/DQN/fmodel_best_19_lr1e-05_frame_1430000_frames
 replay_initial = 10000 #50000
 capacity = 1000000
 replay_buffer = ReplayBuffer(capacity)
+
+env_id = "PongNoFrameskip-v4"
+env = make_atari(env_id)
+env = wrap_deepmind(env, frame_stack=False)
+env = wrap_pytorch(env)
 
 model_new = QLearner(env, args, replay_buffer)
 model_new.load_state_dict(torch.load(model_result_path))
