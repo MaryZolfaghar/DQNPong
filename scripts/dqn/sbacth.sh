@@ -51,7 +51,33 @@
 
 
 # Final Running
-sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_4prevframes_scheduler2.sh
-sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_4prevframes.sh
-sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_scheduler2_version2.sh
-sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_4prevframes_RMSopt.sh
+sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_4prevframes_scheduler2.sh  #90609 -> slow and not good that much - Frame: 1990k Loss: 0.004627831 Last-10 average reward: 11.4 Best mean reward of last-10: 16.8
+sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_4prevframes.sh #90610 -> start to go down ->                       Frame: 1740k Loss: 0.004173764 Last-10 average reward: 19.1 Best mean reward of last-10: 19.1 Last-100 average reward: 16.94 Best mean reward of last-100: 18.23
+sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_scheduler2_version2.sh #90611 -> sound promising                   Frame: 1430k Loss: 0.004129095 Last-10 average reward: 19.6 Best mean reward of last-10: 19.6 Last-100 average reward: 18.02 Best mean reward of last-100: 18.02
+sbatch scripts/dqn/dqn_pong_deafults_lr3e_5_10Mframes_4prevframes_RMSopt.sh #90612 -> starts to go down                  Frame: 1770k Loss: 0.0050163595 Last-10 average reward: 18.7 Best mean reward of last-10: 18.7 Last-100 average reward: 15.79 Best mean reward of last-100: 15.79
+
+fmodel_best_19_lr1e-05_frame_1430000_framestack_False_scheduler_True_scheduler2_version2.pth
+fmodel_best_19_lr3e-05_frame_1740000_framestack_True_scheduler_False_4prevframes_version2.pth
+model_best_19_lr1e-05_frame_1560000_framestack_True_scheduler_True.pth
+
+
+running
+90568  -> sounds promising , fluctuates a lot and is going down but might do better accoridng to its trend - model_lr3e_5_10Mframes_4prevframes_scheduler2.pth
+          Frame: 1560k Loss: 0.0040654526 Last-10 average reward: 19.4 Best mean reward of last-10: 19.4 Last-100 average reward: 16.34 Best mean reward of last-100: 16.97 Time: 0.021749496459960938 Total time so far: 124916.45731282234
+
+90564   -> doesnt have any log! scacnel
+
+90612  - above - Frame: 1770k Best mean reward of last-10: 18.7
+
+NewLearningRate:  [2.9403e-05]
+model_lr3e_5_10Mframes_scheduler2_version2.pth
+"BEST" 90611  - above - Frame: 1430k Best mean reward of last-10: 19.6
+
+90610  - above - Frame: 2100k Best mean reward of last-10: 19.4
+90609  - above - Frame: 2450k Best mean reward of last-10: 18.7
+
+90446 -> scancelled , model_lr3e_5_10Mframes_scheduler2.pth was good but starts going down! check it is has been save around 1M frames
+         Frame: 1390k Loss: 0.0031094998 Last-10 average reward: 17.3 Best mean reward of last-10: 19.7 Last-100 average reward: 16.92 Best mean reward of last-100: 18.14 Time: 0.01653909683227539 Total time so far: 103813.75174665451
+         Frame: 1400k Loss: 0.0030980392 Last-10 average reward: 19.9 Best mean reward of last-10: 19.9 Last-100 average reward: 17.11 Best mean reward of last-100: 18.14 Time: 0.017970561981201172 Total time so far: 104652.40115499496
+         path: ../results/DQN/model_lr3e_5_10Mframes_scheduler2.pth
+         path: ../results/DQN/interim/cannot find!

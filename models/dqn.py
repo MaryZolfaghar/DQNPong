@@ -37,27 +37,12 @@ class QLearner(nn.Module):
             nn.Conv2d(64, 64, kernel_size=3, stride=1),
             nn.ReLU()
         )
-        # self.features = nn.Sequential(
-        #     nn.Conv2d(self.input_shape[0], 32, kernel_size=3, stride=1),
-        #     nn.ReLU(),
-        #     nn.Conv2d(32, 32, kernel_size=3, stride=1),
-        #     nn.ReLU(),
-        #     nn.Conv2d(32, 32, kernel_size=3, stride=1),
-        #     nn.ReLU()
-        # )
+
         self.fc = nn.Sequential(
             nn.Linear(self.feature_size(), 512),
             nn.ReLU(),
             nn.Linear(512, self.num_actions)
         )
-    #     self.emb = nn.Sequential(
-    #         nn.Linear(self.feature_size(), 512),
-    #         nn.ReLU()
-    #     )
-    # def embeddings(self, x):
-    #     x = self.features(x)
-    #     x = self.emb(x)
-    #     return x
 
     def forward(self, x):
         x = self.features(x)
