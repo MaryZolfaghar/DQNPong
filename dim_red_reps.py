@@ -22,7 +22,20 @@ from models.dqn import QLearner, compute_td_loss, ReplayBuffer
 USE_CUDA = torch.cuda.is_available()
 
 parser = argparse.ArgumentParser()
+# QLearner
+parser.add_argument('--batch_size', type=int, default=16,
+                    help='')
+parser.add_argument('--num_frames', type=int, default=1000000,
+                    help='')
+parser.add_argument('--gamma', type=float, default=0.99,
+                    help='Temporal discounting parameter')
+parser.add_argument('--N', type=int, default=1,
+                    help='Horizon for N-step Q-estimates')
+# Wrapper
+parser.add_argument('--frame_stack', action='store_true',
+                    help='Num of frames to stack, default is using prev four frames')
 
+# Dim reduction representations
 parser.add_argument('--embedding_type', choices=['fc_features','out','hidd_features'],
                     default='fc_features',
                     help='what layer output to use as embedding')
