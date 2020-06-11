@@ -10,15 +10,17 @@ from matplotlib.colors import ListedColormap
 import argparse
 import time
 import numpy as np
+
 import torch
 import torch.nn as nn
+import torch.autograd as autograd
 
 import gym
 from Wrapper.layers import *
 from Wrapper.wrappers import make_atari, wrap_deepmind, wrap_pytorch
 from models.dqn import QLearner, compute_td_loss, ReplayBuffer
 
-
+Variable = lambda *args, **kwargs: autograd.Variable(*args, **kwargs).cuda() if USE_CUDA else autograd.Variable(*args, **kwargs)
 USE_CUDA = torch.cuda.is_available()
 
 parser = argparse.ArgumentParser()
