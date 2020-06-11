@@ -19,4 +19,4 @@ echo "gpu" $gpu
 python3 dim_red_reps.py \
 --dim_red_method KernelPCA \
 --kernel_pca rbf \
---gamma 10
+--kpca_gamma 10

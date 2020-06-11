@@ -46,7 +46,7 @@ parser.add_argument('--dim_red_method', choices=['PCA','KernelPCA','Isomap','LLE
 parser.add_argument('--kernel_pca', choices=["linear", "poly", "rbf", "sigmoid", "cosine", "precomputed"],
                     default='poly',
                     help='what kerel use for PCA')
-parser.add_argument('--gamma', type=float, default=10,
+parser.add_argument('--kpca_gamma', type=float, default=10,
                     help='Kernel coefficient for rbf, poly and sigmoid kernels. Ignored by other kernels')
 # Saving
 parser.add_argument('--save_interim_dim_red', default='../results/DQN/interim/dim_red_results/',
@@ -146,10 +146,10 @@ if dim_red_method=='PCA':
     np.save(args.save_interim_dim_red + 'pca_emb_2d.npy', pca_emb_2d)
 
 elif dim_red_method=='KernelPCA':
-    kpca_emb = KernelPCA(n_components=2, kernel=args.kernel_pca, gamma=args.gamma)
+    kpca_emb = KernelPCA(n_components=2, kernel=args.kernel_pca, gamma=args.kpca_gamma)
     kpca_emb_2d = kpca_emb.fit_transform(state_embeddings)
     np.save(args.save_interim_dim_red + 'kpca_kernel_%s_gamma%s_emb_2d.npy' \
-            %(args.kernel_pca, args.gamma), kpca_emb_2d)
+            %(args.kernel_pca, args.kpca_gamma), kpca_emb_2d)
 
 elif dim_red_method=='Isomap':
     isomap_emb = Isomap(n_components=2)
