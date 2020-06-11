@@ -92,6 +92,7 @@ model_new = model_new.cuda()
 #---------------------------------------------------------------------------------------
 # load data that randomely sampled from replay-buffer using best pre-trainned model
 #---------------------------------------------------------------------------------------
+save_interim_dim_red = args.save_interim_dim_red
 state      = np.load(save_interim_dim_red + 'state_sample_pretrainned_buffer.npy')
 action     = np.load(save_interim_dim_red + 'action_sample_pretrainned_buffer.npy')
 reward     = np.load(save_interim_dim_red + 'reward_sample_pretrainned_buffer.npy')
