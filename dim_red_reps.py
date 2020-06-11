@@ -56,6 +56,8 @@ def plot_emb_scatter(embedding, labels, title, save_fn):
 #---------------------------------------------------------------------------------------
 # load best pre-trainned model
 #---------------------------------------------------------------------------------------
+args = parser.parse_args()
+#------
 model_result_path =  '../results/DQN/fmodel_best_19_lr1e-05_frame_1430000_framestack_False_scheduler_True_scheduler2_version2.pth'
 replay_initial = 10000 #50000
 replay_buffer = ReplayBuffer(args.capacity)
