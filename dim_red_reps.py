@@ -131,7 +131,7 @@ if embedding_type == 'out':
 elif embedding_type == 'hidd_features':
     state_embedding = model_new.features(state1)
 elif embedding_type == 'fc_features':
-    state_batch1 = model_new.features(state_batch)
+    state_batch1 = model_new.features(next_state_batch)
     state_batch2 = state_batch1.view(state_batch1.size(0), -1)
     fc_output = model_new.fc[0](state_batch2).cpu().detach().numpy()
 
@@ -146,30 +146,30 @@ dim_red_method = args.dim_red_method
 if dim_red_method=='PCA':
     pca_emb = PCA(n_components=2)
     pca_emb_2d = pca_emb.fit_transform(state_embeddings)
-    np.save(args.save_interim_dim_red + 'pca_emb_2d.npy', pca_emb_2d)
+    np.save(args.save_interim_dim_red + 'pca_emb_2d_nexts.npy', pca_emb_2d)
 
 elif dim_red_method=='KernelPCA':
     kpca_emb = KernelPCA(n_components=2, kernel=args.kernel_pca, gamma=args.kpca_gamma)
     kpca_emb_2d = kpca_emb.fit_transform(state_embeddings)
-    np.save(args.save_interim_dim_red + 'kpca_kernel_%s_gamma%s_emb_2d.npy' \
+    np.save(args.save_interim_dim_red + 'kpca_kernel_%s_gamma%s_emb_2d_nexts.npy' \
             %(args.kernel_pca, args.kpca_gamma), kpca_emb_2d)
 
 elif dim_red_method=='Isomap':
     isomap_emb = Isomap(n_components=2)
     isomap_emb_2d = isomap_emb.fit_transform(state_embeddings)
-    np.save(args.save_interim_dim_red + 'isomap_emb_2d.npy', isomap_emb_2d)
+    np.save(args.save_interim_dim_red + 'isomap_emb_2d_nexts.npy', isomap_emb_2d)
 
 elif dim_red_method=='LLE':
     lle_emb = LocallyLinearEmbedding(n_components=2)
     lle_emb_2d = lle_emb.fit_transform(state_embeddings)
-    np.save(args.save_interim_dim_red + 'lle_emb_2d.npy', lle_emb_2d)
+    np.save(args.save_interim_dim_red + 'lle_emb_2d_nexts.npy', lle_emb_2d)
 
 elif dim_red_method=='MDS':
     mds_emb = MDS(n_components=2)
     mds_emb_2d = mds_emb.fit_transform(state_embeddings)
-    np.save(args.save_interim_dim_red + 'mds_emb_2d.npy', mds_emb_2d)
+    np.save(args.save_interim_dim_red + 'mds_emb_2d_nexts.npy', mds_emb_2d)
 
 elif dim_red_method=='tSNE':
     tsne_emb = TSNE(n_components=2)
     tsne_emb_2d = tsne_emb.fit_transform(state_embeddings)
-    np.save(args.save_interim_dim_red + 'tsne_emb_2d.npy', tsne_emb_2d)
+    np.save(args.save_interim_dim_red + 'tsne_emb_2d_nexts.npy', tsne_emb_2d)
